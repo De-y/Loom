@@ -5,4 +5,21 @@
 
 .brand {
     font-family: 'Poppins-Brand';
+    font-size: 2.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    transform: translate(5rem, -5.80rem);
+    user-select: none;
+}
+
+.br {
+    font-family: 'Poppins-Brand';
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
 }
