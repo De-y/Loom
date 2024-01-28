@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Poppins-logo';
+    src: url('/fonts/Poppins-Black.ttf');
+}
+
+.navbar {
+    background-color: rgb(40, 40, 40);
+
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    font-family: 'Poppins-logo';
+}
+.logo h1 {
+    font-size: 32.5px;
+    transform: translateY(-1.25px);
+}
+.logo img {
+    width: 50px;
+    height: 50px;
+}
