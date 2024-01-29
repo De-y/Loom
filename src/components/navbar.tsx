@@ -3,8 +3,8 @@ export default function Navbar() {
     return (
         <div className='navbar'>
             <div  className='logo'>
-                <img src='/loom.png'/>
-                <h1>Loom</h1>
+                <a href="/"><img src='/loom.png'draggable="false"/></a>
+                <a href="/"><h1>Loom</h1></a>
             </div>
         </div>
     )

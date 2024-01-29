@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <h1>e</h1>
+      <div className="introduction">
+        <p>Introducing Loom</p>
+        <h1>The tutoring platform made for students by students.</h1>
+      </div>
     </>
   );
 }
