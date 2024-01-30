@@ -26,7 +26,7 @@
     }
 }
 
-.form {
+form {
     & {
         display: flex;
         flex-direction: column;
@@ -68,6 +68,14 @@
     }
 }
 
+.links-lgl {
+    & {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: auto;
+    }
+}
 
 .gt {
     height: 100vh;
@@ -76,7 +84,7 @@
     background-size: cover;
 }
 
-.login {
+.signup {
     & {
         border-radius: 10px;
         background-color: rgb(29, 29, 29);
@@ -89,7 +97,7 @@
         padding: 25px;
         position: absolute;
         top: 50%;
-        left: 75%;
+        left: 50%;
         transform: translate(-50%, -50%);
     }
 
@@ -99,11 +107,6 @@
     }
 }
 
-.atech {
-    transform: translate(1%, -50%);
-    top: 50%;
-    position: absolute;
-}
 @media screen and (max-width: 600px) {
     .login {
         & {
