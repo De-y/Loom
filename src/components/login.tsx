@@ -1,13 +1,20 @@
 'use client'
 
 import '@/css/login.css'
+import { fetch } from "popsicle";
 export default function LoginIt() {
     var message = ''
     const submit = function() {
         const username = document.getElementById('username').value
         const password = document.getElementById('password').value
         if (password && username) {
-            
+            fetch('/api/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                }),
+            })
         } else {
             document.getElementById('errsucc').style.display =  'block'
             document.getElementById('err-message').innerHTML = "No Username or Password Provided."
