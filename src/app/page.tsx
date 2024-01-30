@@ -16,15 +16,15 @@ export default function Home() {
         <div className="login">
           <h1>Login to your account</h1>
           <p>To be able to continue.</p>
-          <br />
-          <a>Login <FontAwesomeIcon icon={faArrowRight}/></a>
+          <br className="e"/>
+          <a href="/login">Login <FontAwesomeIcon icon={faArrowRight}/></a>
         </div>
-        <br />
+        <br className="x"/>
         <div className="signup">
           <h1>If you don't have an account</h1>
           <p>Apply for an account to be able to continue.</p>
-          <br />
-          <a>Apply <FontAwesomeIcon icon={faLink}/></a>
+          <br className="e"/>
+          <a href="/signup">Apply <FontAwesomeIcon icon={faLink}/></a>
         </div>
       </div>
     </>

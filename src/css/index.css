@@ -39,7 +39,7 @@ body {
     gap: 20px;
     margin: 10px;
 }
-.grid br {
+.grid .x {
     display: none;
 }
 
@@ -81,6 +81,9 @@ body {
     background-color: rgb(63, 63, 63);
 }
 
+.e {
+    display:initial;
+}
 
 .login p {
     font-size: 15px;
