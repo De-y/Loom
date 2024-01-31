@@ -21,7 +21,7 @@ export default function LoginIt() {
                 document.getElementById('errsucc').style.display =  'block'
                 document.getElementById('err-message').innerHTML = "Incorrect username or password."                    
             } else {
-                setCookie('authentication', token, {'secure': true, 'sameSite': 'strict'})
+                setCookie('authorization', token, {'secure': true, 'sameSite': 'strict'})
                 window.location = '/application'
             }
         } else {
