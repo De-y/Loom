@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id String @id @default(cuid())
+  username String @unique
+  email String
+  password String
+  name String
+  age String
+  verified Boolean @default(false)
+  saltA String
+  saltB String
+}
+
+model profile {
+  id  String @id @default(cuid())
+  relatedUsername String
+  certifications  String[] @default([])
+  hoursEarned Int @default(0)
+  minutesEarned Float @default(0.00)
+  hoursLearnt Int @default(0)
+  minutesLearnt Int @default(0)
+  sessionsAttended Int @default(0)
+  sessionsHosted Int @default(0)
+}
