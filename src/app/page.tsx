@@ -21,7 +21,7 @@ export default function Home() {
         </div>
         <br className="x"/>
         <div className="signup">
-          <h1>If you don't have an account</h1>
+          <h1>If you don&apos;t have an account</h1>
           <p>Apply for an account to be able to continue.</p>
           <br className="e"/>
           <a href="/signup">Apply <FontAwesomeIcon icon={faLink}/></a>

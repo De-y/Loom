@@ -8,10 +8,12 @@ import {parse} from 'cookie'
 export async function GET(request: Request) {
     try {
         let token = request.headers.get('cookie')
+        // @ts-ignore
         let decision = await jwt.jwtVerify(parse(token)['authorization'], createSecretKey(process.env.jwt_secret, 'utf-8'))
         let accountLookupService = await db.user.findFirst({
             where: {
-                'email': decision.payload.id
+                // @ts-ignore
+                'email': decision?.payload.id
             }
         })
         if (decision.payload.aud == 'Loom' && accountLookupService != null) {

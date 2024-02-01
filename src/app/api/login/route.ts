@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     'username': username,
   }})
   if (userService != undefined && userService.password == createHash('SHA3-512').update(`${userService.saltA}${password}${userService.saltB}`).digest('hex')) {
+    // @ts-ignore
     token = await new jwt.SignJWT({id: username}).setProtectedHeader({alg: 'HS256'}).setAudience('Loom').setExpirationTime('1 year').sign(createSecretKey(process.env.JWT_Secret, 'utf-8'))
     authenticated = true    
   } else {

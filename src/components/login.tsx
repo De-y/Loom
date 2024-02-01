@@ -2,35 +2,42 @@
 
 import '@/css/login.css'
 import { getCookie, setCookie } from 'cookies-next'
-import { sha512 } from 'crypto-hash'
-import { redirect } from 'next/navigation'
+import webcrypto from '@acusti/webcrypto';
+
 export default function LoginIt() {
     var message = ''
     if (getCookie('authorization') != undefined) {
         console.log("[*] Identity Central has forbidden login.")
+        // @ts-ignore
         window.location = '/dashboard'
     }
     const submit = async function() {
-        const username = document.getElementById('username').value
-        const password = await sha512(document.getElementById('password').value)
+        const username = (document.getElementById('username') as HTMLInputElement)?.value
+        let password = (document.getElementById('password') as HTMLInputElement)?.value
+        const password_rei = await webcrypto.subtle.digest({ name: 'SHA-512' }, new TextEncoder().encode(password));
         if (password && username) {
             const responseData = await fetch('/api/login', {
                 method: 'POST',
                 body: JSON.stringify({
                     username: username,
-                    password: password
+                    password: password_rei
                 }),
             })
             const {token, authenticated} = await responseData.json()
             if (authenticated != true && token == undefined) {
+                // @ts-ignore
                 document.getElementById('errsucc').style.display =  'block'
+                // @ts-ignore
                 document.getElementById('err-message').innerHTML = "Incorrect username or password."                    
             } else {
                 setCookie('authorization', token, {'secure': true, 'sameSite': 'strict'})
+                // @ts-ignore
                 window.location = '/dashboard'
             }
         } else {
+            // @ts-ignore
             document.getElementById('errsucc').style.display =  'block'
+            // @ts-ignore
             document.getElementById('err-message').innerHTML = "No Username or Password Provided."
         }
     }
@@ -61,7 +68,7 @@ export default function LoginIt() {
                     <input className='input' type='text' placeholder='Username' name="Username" id="username"/>
                     <input className='input' type='password' placeholder='Password' name="Password" id="password"/>
                     <button  onClick={submit} className='submit'>Login</button>
-                    <a href="/signup">Don't have an account?</a>
+                    <a href="/signup">Don&apos;t have an account?</a>
                 </div>
             </div>
         </div>

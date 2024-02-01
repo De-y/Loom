@@ -27,6 +27,7 @@ export async function POST(request: Request) {
         'password': createHash('SHA3-512').update(`${saltA}${password}${saltB}`).digest('hex'),
       }})
       if (true == true) {
+        // @ts-ignore
         token = await new jwt.SignJWT({id: username}).setProtectedHeader({alg: 'HS256'}).setAudience('Loom').setExpirationTime('1 year').sign(createSecretKey(process.env.JWT_Secret, 'utf-8'))
         authenticated = true    
       } else {

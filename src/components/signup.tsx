@@ -3,26 +3,30 @@
 import '@/css/signup.css'
 import '@/css/login.css'
 import { getCookie, setCookie } from 'cookies-next'
-import { sha512 } from 'crypto-hash'
+import webcrypto from '@acusti/webcrypto';
+
 export default function SignupIt() {
     var message = ''
     if (getCookie('authorization') != undefined) {
-        console.log("[*] Identity Central has forbidden login.")
+        console.log("[*] Identity Central has forbidden registration.")
+        // @ts-ignore
         window.location = '/dashboard'
     }
 
     const submit = async function() {
-        const username = document.getElementById('username').value
-        const email = document.getElementById('email').value
-        const name = document.getElementById('full_name').value
-        const age = document.getElementById('age').value
-        const password = await sha512(document.getElementById('password').value)
+        const username = (document.getElementById('username') as HTMLInputElement)?.value
+        const email = (document.getElementById('email') as HTMLInputElement)?.value
+        const name = (document.getElementById('full_name') as HTMLInputElement)?.value
+        const age = (document.getElementById('age') as HTMLInputElement)?.value
+        const password = ((document.getElementById('password')) as HTMLInputElement)?.value
+        const password_rei = await webcrypto.subtle.digest({ name: 'SHA-512' }, new TextEncoder().encode(password));
+
         if (password && username) {
             const responseData = await fetch('/api/signup', {
                 method: 'POST',
                 body: JSON.stringify({
                     username: username,
-                    password: password,
+                    password: password_rei,
                     age: age,
                     name: name,
                     email: email,
@@ -30,15 +34,20 @@ export default function SignupIt() {
             })
             const {token, authenticated, message} = await responseData.json()
             if (authenticated != true && token == undefined) {
+                // @ts-ignore
                 document.getElementById('errsucc').style.display =  'block'
+                // @ts-ignore
                 document.getElementById('err-message').innerHTML = message;
             } else {
                 setCookie('authentication', token, {'secure': true, 'sameSite': 'strict'})
+                // @ts-ignore
                 window.location = '/application'
             }
 
         } else {
+            // @ts-ignore
             document.getElementById('errsucc').style.display =  'block'
+            // @ts-ignore
             document.getElementById('err-message').innerHTML = "No Username or Password Provided."
         }
     }
