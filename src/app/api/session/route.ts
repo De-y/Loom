@@ -2,16 +2,14 @@ import { NextResponse } from "next/server";
 import * as jwt from 'jose'
 import { createSecretKey } from "crypto";
 import db from '@/db/prisma'
-import { cookies } from 'next/headers'
 import {parse} from 'cookie'
 
 export async function GET(request: Request) {
     try {
         // @ts-ignore
-        let token = cookies().get('authorization')['value']
+        let token = request.headers.get('cookie')
         // @ts-ignore
         let decision = await jwt.jwtVerify(parse(token)['authorization'], createSecretKey(process.env.jwt_secret, 'utf-8'))
-        console.log(decision)
         let accountLookupService = await db.user.findFirst({
             where: {
                 // @ts-ignore
@@ -33,7 +31,6 @@ export async function GET(request: Request) {
         return NextResponse.json({
             'authenticated': false,
             'authID': 'SEI',
-            'error': err,
         })
     }
 }

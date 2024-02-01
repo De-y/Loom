@@ -5,7 +5,7 @@ export default function Session() {
     fetch(`/api/session`).then((response) => {
         response.json().then((authentication_status) => {
             if (authentication_status['authenticated'] == false) {
-                deleteCookie('authorization')
+                // deleteCookie('authorization')
                 return (
                     // @ts-ignore
                     // window.location = '/login'
