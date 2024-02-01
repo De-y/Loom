@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import * as jwt from 'jose'
 import { createSecretKey } from "crypto";
 import db from '@/db/prisma'
-import {parse} from 'cookie'
 
 export async function POST(request: Request) {
     try {
@@ -10,7 +9,7 @@ export async function POST(request: Request) {
         let authorization = await request.json()
         const token = authorization['token'];
         // @ts-ignore
-        let decision = await jwt.jwtVerify(token, createSecretKey(process.env.jwt_secret, 'utf-8'))
+        let decision = await jwt.jwtVerify(token, createSecretKey('avnceStagingDeveloperInIT', 'utf-8'))
         let accountLookupService = await db.user.findFirst({
             where: {
                 // @ts-ignore
