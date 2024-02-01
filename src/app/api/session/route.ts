@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import * as jwt from 'jose'
 import { createSecretKey } from "crypto";
 import db from '@/db/prisma'
-import { PrismaClientInitializationError } from "@prisma/client/runtime/library.js";
+import { cookies } from 'next/headers'
 import {parse} from 'cookie'
 
 export async function GET(request: Request) {
     try {
-        let token = request.headers.get('cookie')
-        console.log(token)
+        // @ts-ignore
+        let token = cookies().get('authorization')['value']
         // @ts-ignore
         let decision = await jwt.jwtVerify(parse(token)['authorization'], createSecretKey(process.env.jwt_secret, 'utf-8'))
         console.log(decision)
