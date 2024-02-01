@@ -9,6 +9,7 @@ export default function Session() {
                 return (
                     // @ts-ignore
                     // window.location = '/login'
+                    <></>
                 )
             } else {
                 console.log("[*] Identity Central: Confirmed Session.")
