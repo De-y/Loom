@@ -1,10 +1,12 @@
 'use client';
 
-import * as session from '@/components/session'
+import '@/css/dashboard.css'
+import Session from '@/components/session'
 export default async function Dashboard() {
+    Session()
     return (
         <>
-            <h1>HFJNF</h1>
+            <a href='/logout'>Logout </a>
         </>
     )
 }
