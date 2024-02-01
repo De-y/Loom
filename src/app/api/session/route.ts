@@ -8,8 +8,10 @@ import {parse} from 'cookie'
 export async function GET(request: Request) {
     try {
         let token = request.headers.get('cookie')
+        console.log(token)
         // @ts-ignore
         let decision = await jwt.jwtVerify(parse(token)['authorization'], createSecretKey(process.env.jwt_secret, 'utf-8'))
+        console.log(decision)
         let accountLookupService = await db.user.findFirst({
             where: {
                 // @ts-ignore
@@ -24,10 +26,14 @@ export async function GET(request: Request) {
         }
         return NextResponse.json({
             'authenticated': false,
+            'authID': 'VEJ',
+            'debugAuth': [token, decision, accountLookupService]
         })
     } catch (err) {
         return NextResponse.json({
             'authenticated': false,
+            'authID': 'SEI',
+            'error': err,
         })
     }
 }
