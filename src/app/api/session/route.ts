@@ -33,6 +33,7 @@ export async function POST(request: Request) {
         return NextResponse.json({
             'authenticated': false,
             'authID': 'SEI',
+            'errorInformation': err,
         })
     }
 }
