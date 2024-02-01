@@ -28,6 +28,7 @@ export async function GET(request: Request) {
             'debugAuth': [token, decision, accountLookupService]
         })
     } catch (err) {
+        console.log(err)
         return NextResponse.json({
             'authenticated': false,
             'authID': 'SEI',
