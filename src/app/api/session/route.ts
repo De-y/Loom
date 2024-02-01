@@ -16,7 +16,8 @@ export async function GET(request: Request) {
                 'email': decision?.payload.id
             }
         })
-        if (decision.payload.aud == 'Loom' && accountLookupService != null) {
+        // @ts-ignore
+        if (decision.payload.aud == 'Loom' && accountLookupService != null && decision?.payload.exp * 1000 >= new Date().getTime()) {
             return NextResponse.json({
                 'authenticated': true,
             })

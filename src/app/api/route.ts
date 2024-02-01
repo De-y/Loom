@@ -1,3 +1,3 @@
 export async function GET() {
-  return Response.json({ 'e': 'e'})
+  return Response.json({ 'Loom API Version': 'v1'})
 }
