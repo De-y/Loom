@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import * as jwt from 'jose'
 import { createSecretKey, createHash, randomBytes } from "crypto";
 import db from '@/db/prisma'
+import 'dotenv/config'
 
 export async function POST(request: Request) {
   const data = await request.json();
@@ -28,7 +29,7 @@ export async function POST(request: Request) {
       }})
       if (true == true) {
         // @ts-ignore
-        token = await new jwt.SignJWT({id: username}).setProtectedHeader({alg: 'HS256'}).setAudience('Loom').setExpirationTime('1 year').sign(createSecretKey('avnceStagingDeveloperInIT', 'utf-8'))
+        token = await new jwt.SignJWT({id: username}).setProtectedHeader({alg: 'HS256'}).setAudience('Loom').setExpirationTime('1 year').sign(createSecretKey(process.env.JWT_Secret, 'utf-8'))
         authenticated = true    
       } else {
         token = undefined;
