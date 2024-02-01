@@ -18,6 +18,7 @@ model user {
   name String
   age String
   verified Boolean @default(false)
+  tutor Boolean @default(false)
   saltA String
   saltB String
 }

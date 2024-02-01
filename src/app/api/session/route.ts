@@ -14,7 +14,7 @@ export async function POST(request: Request) {
         let accountLookupService = await db.user.findFirst({
             where: {
                 // @ts-ignore
-                'email': decision?.payload.id
+                'username': decision?.payload.id
             }
         })
         // @ts-ignore

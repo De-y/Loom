@@ -7,6 +7,8 @@ CREATE TABLE "user" (
     "name" STRING NOT NULL,
     "age" STRING NOT NULL,
     "verified" BOOL NOT NULL DEFAULT false,
+    "saltA" STRING NOT NULL,
+    "saltB" STRING NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
