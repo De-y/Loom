@@ -4,7 +4,7 @@ import { createSecretKey } from "crypto";
 import db from '@/db/prisma'
 import {parse} from 'cookie'
 
-export default async function handler(req: NextRequest, res: NextResponse) {
+export default async function GET(req: NextRequest, res: NextResponse) {
     try {
         // @ts-ignore
         let token = request.headers.get('cookie')
