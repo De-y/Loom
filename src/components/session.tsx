@@ -8,7 +8,8 @@ export default function Session() {
                 deleteCookie('authorization')
                 return (
                     // @ts-ignore
-                    window.location = '/login'
+                    // window.location = '/login'
+                    <></>
                 )
             } else {
                 console.log("[*] Identity Central: Confirmed Session.")
