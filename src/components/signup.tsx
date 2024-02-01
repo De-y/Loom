@@ -2,10 +2,15 @@
 
 import '@/css/signup.css'
 import '@/css/login.css'
-import { setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { sha512 } from 'crypto-hash'
 export default function SignupIt() {
     var message = ''
+    if (getCookie('authorization') != undefined) {
+        console.log("[*] Identity Central has forbidden login.")
+        window.location = '/dashboard'
+    }
+
     const submit = async function() {
         const username = document.getElementById('username').value
         const email = document.getElementById('email').value

@@ -1,17 +1,18 @@
 'use client'
-
 import { deleteCookie } from 'cookies-next'
-import { fetch } from "popsicle";
+import { useRouter } from 'next/router'
 
 export default function Session() {
-    const sessionDecider = function () {
-        let e = fetch(`${window.location.origin}/api/session`)
-    }
-    return (
-        <>
-        <script>
-            {sessionDecider()}
-        </script>
-        </>
-    )
+    fetch('http://localhost:3000/api/session').then((response) => {
+        response.json().then((authentication_status) => {
+            if (authentication_status['authenticated'] == false) {
+                deleteCookie('authorization')
+                // return (
+                //     window.location = '/logout'
+                // )
+            } else {
+                console.log("[*] Identity Central: Confirmed Session.")
+            }
+        })
+    })
 }

@@ -1,10 +1,15 @@
 'use client'
 
 import '@/css/login.css'
-import { setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { sha512 } from 'crypto-hash'
+import { redirect } from 'next/navigation'
 export default function LoginIt() {
     var message = ''
+    if (getCookie('authorization') != undefined) {
+        console.log("[*] Identity Central has forbidden login.")
+        window.location = '/dashboard'
+    }
     const submit = async function() {
         const username = document.getElementById('username').value
         const password = await sha512(document.getElementById('password').value)
@@ -22,7 +27,7 @@ export default function LoginIt() {
                 document.getElementById('err-message').innerHTML = "Incorrect username or password."                    
             } else {
                 setCookie('authorization', token, {'secure': true, 'sameSite': 'strict'})
-                window.location = '/application'
+                window.location = '/dashboard'
             }
         } else {
             document.getElementById('errsucc').style.display =  'block'
@@ -31,6 +36,13 @@ export default function LoginIt() {
     }
     return (
         <>
+        {/* <script>
+            let f = await fetch('/api/session')
+            let decision = await f.json()
+            if (decision == true) {
+                redirect('/dashboard')
+            }
+        </script> */} 
         <div className='login'>
             <div className='atech'>
                 <div className='logo'>
