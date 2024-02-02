@@ -1,7 +1,6 @@
 'use client'
 
 import { deleteCookie, getCookie, hasCookie } from "cookies-next"
-import redirect from 'nextjs-redirect'
 
 export default function ProtectedStore() {
     if (hasCookie("authorization")) {
