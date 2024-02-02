@@ -4,11 +4,6 @@ import { deleteCookie, getCookie, hasCookie } from "cookies-next"
 import redirect from 'nextjs-redirect'
 
 export default function ProtectedStore() {
-    if (getCookie('authorization') == undefined) {
-        console.log("[*] Identity Central has forbidden login.")
-        // @ts-ignore
-        window.location = '/login'
-    }
     if (hasCookie("authorization")) {
         fetch('/api/profile', {
             'method': 'POST',
