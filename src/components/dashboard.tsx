@@ -7,8 +7,9 @@ import { getCookie } from 'cookies-next';
 export default function Dash() {
     if (getCookie('authorization') == undefined) {
         return (
-            // @ts-ignore
-            window.location = '/login'
+            <>
+                <h1>Please login.</h1>
+            </>
         )
     }
     ProtectedStore()
