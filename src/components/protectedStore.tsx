@@ -18,7 +18,7 @@ export default function ProtectedStore() {
                     } else {
                         return (
                             // @ts-ignore
-                            window.location = '/login'
+                            window.location = '/application'
                         )    
                     }
                 } else {
@@ -30,7 +30,7 @@ export default function ProtectedStore() {
                 }
             })
         }).catch((err) => {
-            console.log("[*] Identity Central has failed to activate.")
+            console.log("[*] Identity Central is activating.")
         })
     } else {
         console.log("You do not have an account.")
