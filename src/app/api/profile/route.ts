@@ -41,7 +41,7 @@ export async function POST(request: Request) {
                         'minutesLearnt': profileLookupService.minutesLearnt,
                         'sessionsAttended': profileLookupService.sessionsAttended
                     },
-                    'tutor_statistics' {
+                    'tutor_statistics': {
                         'certifications': profileLookupService.certifications,
                         'hoursEarned': profileLookupService.hoursEarned,
                         'minutesEarned': profileLookupService.minutesEarned,

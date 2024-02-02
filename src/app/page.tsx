@@ -3,6 +3,8 @@ import '@/css/index.css'
 import Navbar from '@/components/navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faLink } from '@fortawesome/free-solid-svg-icons'
+import { getCookie } from "cookies-next";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Home() {
   return (

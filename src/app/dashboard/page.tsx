@@ -1,9 +1,9 @@
 'use client';
 
+import ProtectedStore from '@/components/protectedStore';
 import '@/css/dashboard.css'
-import Session from '@/components/session'
-export default async function Dashboard() {
-    Session()
+export default function Dashboard() {
+    ProtectedStore()
     return (
         <>
             <a href='/logout'>Logout </a>

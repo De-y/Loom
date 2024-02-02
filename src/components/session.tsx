@@ -14,11 +14,10 @@ export default function Session() {
         }).then((response) => {
             response.json().then((authentication_status) => {
                 if (authentication_status['authenticated'] == false) {
-                    // deleteCookie('authorization')
+                    deleteCookie('authorization')
                     return (
                         // @ts-ignore
-                        // window.location = '/login'
-                        <></>
+                        window.location = '/login'
                     )
                 } else {
                     console.log("[*] Identity Central: Confirmed Session.")
