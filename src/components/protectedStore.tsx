@@ -1,11 +1,15 @@
 'use client'
 
 import { deleteCookie, getCookie, hasCookie } from "cookies-next"
-import { redirect } from "next/navigation"
+import redirect from 'nextjs-redirect'
 
 export default function ProtectedStore() {
+    if (getCookie('authorization') == undefined) {
+        console.log("[*] Identity Central has forbidden login.")
+        // @ts-ignore
+        window.location = '/login'
+    }
     if (hasCookie("authorization")) {
-        console.log(JSON.stringify(getCookie('authorization')))
         fetch('/api/profile', {
             'method': 'POST',
             'body': JSON.stringify({
@@ -20,14 +24,14 @@ export default function ProtectedStore() {
                     } else {
                         return (
                             // @ts-ignore
-                            redirect('/application')
-                        )
+                            window.location = '/login'
+                        )    
                     }
                 } else {
                     deleteCookie('authorization')
                     return (
                         // @ts-ignore
-                        redirect('/login')
+                        window.location = '/login'
                     )
                 }
             })
@@ -35,9 +39,6 @@ export default function ProtectedStore() {
             console.log("[*] Identity Central has failed to activate.")
         })
     } else {
-        return (
-            // @ts-ignore
-            redirect('/login')
-        )
+        console.log("You do not have an account.")
     }
 }

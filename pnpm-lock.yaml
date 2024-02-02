@@ -50,6 +50,9 @@ dependencies:
   next-client-cookies:
     specifier: ^1.1.0
     version: 1.1.0(next@14.1.0)(react@18.2.0)
+  nextjs-redirect:
+    specifier: ^6.0.1
+    version: 6.0.1(next@14.1.0)(react@18.2.0)
   popsicle:
     specifier: ^12.1.2
     version: 12.1.2
@@ -2545,6 +2548,16 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nextjs-redirect@6.0.1(next@14.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-SScRdqhGwbD9HbATM+6KMoRyW5QdsPtBBknPPUBxeItnv3wOrhII4pW+0TrvglWNxeRUwI2GsnrDHCV/6juBtQ==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+    dependencies:
+      next: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /node-releases@2.0.14:
