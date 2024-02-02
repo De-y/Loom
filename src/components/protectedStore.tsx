@@ -18,16 +18,16 @@ export default function ProtectedStore() {
                     if (data['verified'] == true) {
                         console.log("[*] Identity Central. You are verified as a user.")
                     } else {
-                        // @ts-ignore
                         return (
-                            location.href = '/application'
+                            // @ts-ignore
+                            redirect('/application')
                         )
                     }
                 } else {
                     deleteCookie('authorization')
-                    // @ts-ignore
                     return (
-                    location.href = '/login'
+                        // @ts-ignore
+                        redirect('/login')
                     )
                 }
             })
@@ -35,9 +35,9 @@ export default function ProtectedStore() {
             console.log("[*] Identity Central has failed to activate.")
         })
     } else {
-        // @ts-ignore
         return (
-            location.href = '/login'
+            // @ts-ignore
+            redirect('/login')
         )
     }
 }
