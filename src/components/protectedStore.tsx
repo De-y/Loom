@@ -13,7 +13,7 @@ export default function ProtectedStore() {
         }).then((response) => {
             response.json().then((data) => {
                 if (data['authenticated'] == true) {
-                    if (data['verified'] == true) {
+                    if (data['profileInformation']['verified'] == true) {
                         console.log("[*] Identity Central. You are verified as a user.")
                     } else {
                         return (

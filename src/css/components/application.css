@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Black.ttf');
+}
+@font-face {
+    font-family: 'Poppins-LG';
+    src: url('/fonts/Poppins-SemiBold.ttf');
+}
+.confirmation {
+    & {
+        background-color: rgb(28, 28, 28);
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    h1 {
+        font-family: 'Poppins-LG';
+        font-size: 40px;
+    }
+    p {
+        font-size: 20px;
+        min-width: 40%;
+        max-width: 500px;
+        margin: auto;
+    }
+    a {
+        font-family: 'poppins';
+        font-size: 30px;
+        user-select: none;
+    }
+}

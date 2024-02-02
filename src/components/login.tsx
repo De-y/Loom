@@ -2,7 +2,7 @@
 
 import '@/css/login.css'
 import { getCookie, setCookie } from 'cookies-next'
-import webcrypto from '@acusti/webcrypto';
+import jsSHA from "jssha";
 
 export default function LoginIt() {
     var message = ''
@@ -14,7 +14,8 @@ export default function LoginIt() {
     const submit = async function() {
         const username = (document.getElementById('username') as HTMLInputElement)?.value
         let password = (document.getElementById('password') as HTMLInputElement)?.value
-        const password_rei = await webcrypto.subtle.digest({ name: 'SHA-512' }, new TextEncoder().encode(password));
+        let password_rei = new jsSHA("SHA3-512", "TEXT", { encoding: "UTF8" }).update(password).getHash('HEX')
+        console.log(password_rei)
         if (password && username) {
             const responseData = await fetch('/api/login', {
                 method: 'POST',

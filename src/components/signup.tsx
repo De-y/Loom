@@ -3,7 +3,7 @@
 import '@/css/signup.css'
 import '@/css/login.css'
 import { getCookie, setCookie } from 'cookies-next'
-import webcrypto from '@acusti/webcrypto';
+import jsSHA from "jssha";
 
 export default function SignupIt() {
     var message = ''
@@ -19,7 +19,7 @@ export default function SignupIt() {
         const name = (document.getElementById('full_name') as HTMLInputElement)?.value
         const age = (document.getElementById('age') as HTMLInputElement)?.value
         const password = ((document.getElementById('password')) as HTMLInputElement)?.value
-        const password_rei = await webcrypto.subtle.digest({ name: 'SHA-512' }, new TextEncoder().encode(password));
+        let password_rei = new jsSHA("SHA3-512", "TEXT", { encoding: "UTF8" }).update(password).getHash('HEX')
 
         if (password && username) {
             const responseData = await fetch('/api/signup', {

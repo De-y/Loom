@@ -11,6 +11,8 @@ export async function POST(request: Request) {
   const userService = await db.user.findFirst({where: {
     'username': username,
   }})
+  console.log(userService.password, createHash('SHA3-512').update(`${userService.saltA}${password}${userService.saltB}`).digest('hex'))
+
   if (userService != undefined && userService.password == createHash('SHA3-512').update(`${userService.saltA}${password}${userService.saltB}`).digest('hex')) {
     // @ts-ignore
     token = await new jwt.SignJWT({id: username}).setProtectedHeader({alg: 'HS256'}).setAudience('Loom').setExpirationTime('10 d').sign(createSecretKey(process.env.JWT_Secret, 'utf-8'))
