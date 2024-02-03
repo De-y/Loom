@@ -15,7 +15,6 @@ export default function LoginIt() {
         const username = (document.getElementById('username') as HTMLInputElement)?.value
         let password = (document.getElementById('password') as HTMLInputElement)?.value
         let password_rei = new jsSHA("SHA3-512", "TEXT", { encoding: "UTF8" }).update(password).getHash('HEX')
-        console.log(password_rei)
         if (password && username) {
             const responseData = await fetch('/api/login', {
                 method: 'POST',

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Poppins-Logo';
+    src: url('/fonts/Poppins-Black.ttf');
+}
+
 body {
     background-color: rgb(20, 20, 20);
     color: white;
@@ -6,5 +11,21 @@ body {
 .profile {
     .image {
         background-color: white ;
+    }
+}
+
+.loading-screen {
+    & {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    h2 { 
+        font-family: 'Poppins-Logo';
+        font-size: 50px;
+    }
+    .loom-load {
+        color: white;
     }
 }

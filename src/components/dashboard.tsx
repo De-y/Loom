@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import { hasCookie, getCookie, deleteCookie } from 'cookies-next';
 import '@/css/dashboard.css';
+import { CircularProgress } from '@mui/material';
 
 const Dash = () => {
     const [profileInformation, setProfileInformation] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchData = async () => {
             if (hasCookie("authorization")) {
@@ -34,6 +37,8 @@ const Dash = () => {
                     }
                 } catch (error) {
                     console.log("[*] Identity Central is activating.");
+                } finally {
+                    setLoading(false)
                 }
             }
         };
@@ -43,10 +48,16 @@ const Dash = () => {
 
     return (
         <div>
-            {profileInformation ? (
+            {loading ? (
+                <div className="loading-screen">
+                    <h2>Loom.</h2>
+                    <CircularProgress className='loom-load'/>
+                    
+                </div>
+            ) : profileInformation ? (
                 <div>
                     <div className='profile'>
-                        <Image src={'/default_profile.svg'} alt="default_profile_image" width={200} height={200} className='image'/>
+                        <Image src={'/default_profile.svg'} alt="default_profile_image" width={100} height={100} className='image'/>
                         {/* @ts-ignore */}
                         <h1>{profileInformation.full_name}</h1>
                     </div>
