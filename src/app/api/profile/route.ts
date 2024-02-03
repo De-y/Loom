@@ -28,6 +28,26 @@ export async function POST(request: Request) {
                 await db.profile.create({data: {
                     'relatedUsername': accountLookupService.username
                 }})
+                return NextResponse.json({
+                    'authenticated': true,
+                    'profileInformation': {
+                        'verified': accountLookupService.verified,
+                        'full_name': accountLookupService.name,
+                        'age': accountLookupService.age,
+                        'is_tutor': accountLookupService.tutor,
+                        'learner_statistics': {
+                            'hoursLearnt': 0,
+                            'minutesLearnt': 0,
+                            'sessionsAttended': 0
+                        },
+                        'tutor_statistics': {
+                            'certifications': [],
+                            'hoursEarned': 0,
+                            'minutesEarned': 0,
+                            'sessionsHosted': 0
+                        }
+                    }
+                })    
             }
             return NextResponse.json({
                 'authenticated': true,

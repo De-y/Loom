@@ -1,9 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image'
+// import Image from 'next/image'
 import { hasCookie, getCookie, deleteCookie } from 'cookies-next';
 import '@/css/dashboard.css';
 import { CircularProgress } from '@mui/material';
+import DashboardNavbar from './dashboard_nav';
 
 const Dash = () => {
     const [profileInformation, setProfileInformation] = useState(null);
@@ -45,24 +46,34 @@ const Dash = () => {
 
         fetchData();
     }, []);
-
     return (
         <div>
             {loading ? (
                 <div className="loading-screen">
                     <h2>Loom.</h2>
-                    <CircularProgress className='loom-load'/>
-                    
+                    <div className='loader'>
+                        <CircularProgress className='loom-load'/>                    
+                    </div>
                 </div>
             ) : profileInformation ? (
-                <div>
-                    <div className='profile'>
-                        <Image src={'/default_profile.svg'} alt="default_profile_image" width={100} height={100} className='image'/>
+                <>
+                    <DashboardNavbar />
+                    <div>
+                        <div className='profile'>
+                            {/* <Image src={'/default_profile.svg'} alt="default_profile_image" width={100} height={100} className='image'/> */}
+                            {/* @ts-ignore */}
+                            <h1>Hello, {profileInformation.full_name.split(" ")[0]}!</h1>
+                            {profileInformation.is_tutor ? <h2>What would you like to tutor or learn today?</h2>: <h2>What would you like to get tutored on today?</h2>}
+                        </div>
+                        <div className='classes-to-learn'>
+                            <h1>Get learning.</h1>
+                            <div className='class-courses'>
+                            </div>
+                        </div>
+
                         {/* @ts-ignore */}
-                        <h1>{profileInformation.full_name}</h1>
                     </div>
-                    {/* @ts-ignore */}
-                </div>
+                </>
             ) : null}
         </div>
     );

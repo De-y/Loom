@@ -5,3 +5,12 @@
 body {
   color: white;
 }
+
+@font-face {
+  font-family: 'Poppins-Logo';
+  src: url('/fonts/Poppins-Black.ttf');
+}
+@font-face {
+  font-family: 'Poppins-Semibold';
+  src: url('/fonts/Poppins-SemiBold.ttf');
+}

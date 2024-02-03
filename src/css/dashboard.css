@@ -1,16 +1,29 @@
-@font-face {
-    font-family: 'Poppins-Logo';
-    src: url('/fonts/Poppins-Black.ttf');
-}
-
 body {
     background-color: rgb(20, 20, 20);
     color: white;
 }
 
 .profile {
+    & {
+        margin: 70px 50px;
+    }
     .image {
-        background-color: white ;
+        background-color: white;
+        border-radius: 100px;
+    }
+    h1 {
+        font-size: 50px;
+        font-family: 'Poppins-Semibold';
+    }
+}
+
+.classes-to-learn {
+    & {
+        text-align: center;
+    }
+    h1 {
+        font-family: 'Poppins-Semibold';
+        font-size: 30px;
     }
 }
 
@@ -24,8 +37,20 @@ body {
     h2 { 
         font-family: 'Poppins-Logo';
         font-size: 50px;
+        user-select: none;
     }
     .loom-load {
         color: white;
     }
+    .loader {
+        transform: translateX(53px);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile {
+        & {
+            text-align: center;
+        }
+    }    
 }

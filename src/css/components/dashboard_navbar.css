@@ -1,0 +1,21 @@
+.navbar {
+    & {
+        background-color: rgb(31, 31, 31);
+    }
+    .logo {
+        & {
+            display: flex;
+            flex-direction: row;
+            gap: 1px;
+        }
+        .loom-lg {
+            font-family: 'Poppins-Logo';
+            font-size: 30px;
+            text-align: center;
+            transform: translateY(1.5px);
+        }
+        a {
+            user-select: none;
+        }
+    }
+}
