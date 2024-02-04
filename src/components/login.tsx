@@ -30,7 +30,9 @@ export default function LoginIt() {
                 // @ts-ignore
                 document.getElementById('err-message').innerHTML = "Incorrect username or password."                    
             } else {
-                setCookie('authorization', token, {'secure': true, 'sameSite': 'strict'})
+                let expiry_date = new Date()
+                expiry_date.setFullYear(expiry_date.getFullYear() + 1)
+                setCookie('authorization', token, {'secure': true, 'sameSite': 'strict', 'expires': expiry_date})
                 // @ts-ignore
                 window.location = '/dashboard'
             }

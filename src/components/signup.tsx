@@ -39,7 +39,9 @@ export default function SignupIt() {
                 // @ts-ignore
                 document.getElementById('err-message').innerHTML = message;
             } else {
-                setCookie('authentication', token, {'secure': true, 'sameSite': 'strict'})
+                let expiry_date = new Date()
+                expiry_date.setFullYear(expiry_date.getFullYear() + 1)
+                setCookie('authentication', token, {'secure': true, 'sameSite': 'strict', 'expires': expiry_date})
                 // @ts-ignore
                 window.location = '/application'
             }
