@@ -28,13 +28,41 @@ body {
     .class-courses {
         & {
             display: inline-grid;
-            grid-template-columns: repeat(2, minmax(300px, 1fr));
-            gap: 20px;
+            width: 90%;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
         .card {
-            background-color: rgb(100, 100, 100);
-            min-width: 300px;
-            border-radius: 10px;
+            & {
+                margin: auto;
+                background-color: rgb(100, 100, 100);
+                min-width: 300px;
+                max-width: 500px;
+                min-height: 200px;
+                border-radius: 10px;
+                position: relative;
+                text-align: center;
+            }
+            .card-content {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+            }
+        }
+        .buttons {
+            & {
+                display: inline-grid;
+                width: 100%;
+                margin: auto;
+                gap: 5px;
+            }
+            .button {
+                margin: auto;
+                width: 90%;
+                background-color: rgb(35, 35, 35);
+                border-radius: 5px;
+                max-height: 100px;
+            }   
         }
     }
 }
@@ -56,6 +84,9 @@ body {
     }
     .loader {
         transform: translateX(53px);
+    }
+    .loader-text {
+        transform: translateX(20px);
     }
 }
 

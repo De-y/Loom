@@ -5,6 +5,7 @@ import { hasCookie, getCookie, deleteCookie } from 'cookies-next';
 import '@/css/dashboard.css';
 import { CircularProgress } from '@mui/material';
 import DashboardNavbar from './dashboard_nav';
+import Router from 'next/router';
 
 const Dash = () => {
     const [profileInformation, setProfileInformation] = useState(null);
@@ -29,12 +30,12 @@ const Dash = () => {
                             setProfileInformation(data.profileInformation);
                         } else {
                             // @ts-ignore
-                            window.location = '/application';
+                            Router.push('/application')
                         }
                     } else {
                         deleteCookie('authorization');
                         // @ts-ignore
-                        window.location = '/login';
+                        Router.push('/login')
                     }
                 } catch (error) {
                     console.log("[*] Identity Central is activating.");
@@ -68,18 +69,24 @@ const Dash = () => {
                         </div>
                         <div className='classes-to-learn'>
                             {/* @ts-ignore */}
-                            {profileInformation.is_tutor ? <h1>Get learning or tutor someone.</h1>: <h1>Get learning.</h1>}
+                            <h1>Spaces.</h1>
                             <div className='class-courses'>
-                                <div className='card'>
-                                    <h2>Mathematics</h2>
-                                    {/* @ts-ignore */}
-                                    {profileInformation.is_tutor ? (<></>): (<></>)}                                    
-                                </div>
-                                <div className='card'>
-                                    <h2>English</h2>
-                                    {/* @ts-ignore */}
-                                    {profileInformation.is_tutor ? (<></>): (<></>)}
-                                </div>
+                                    <div className='card'>
+                                        <div className='card-content'>
+                                            <h1>English</h1>
+                                        </div>
+                                    </div>
+                                    <div className='card'>
+                                        <div className='card-content'>
+                                            <h1>Math</h1>
+                                        </div>
+                                    </div>
+
+                                {/* <a className='card' href="/space/">
+                                    <div className='card-content'>
+                                        <h1>English</h1>
+                                    </div>
+                                </a> */}
                             </div>
                         </div>
 
@@ -89,7 +96,9 @@ const Dash = () => {
             ) : (
                 <div className="loading-screen">
                     <h2>Loom.</h2>
-                    <h1>You are not online.</h1>
+                    <div className='loader-text'>
+                        <h1>Redirecting you.</h1>
+                    </div>
                 </div>
             )}
         </div>
