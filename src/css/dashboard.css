@@ -28,9 +28,13 @@ body {
     .class-courses {
         & {
             display: inline-grid;
+            grid-template-columns: repeat(2, minmax(300px, 1fr));
+            gap: 20px;
         }
         .card {
-            background-color: rgb(16, 16, 16);
+            background-color: rgb(100, 100, 100);
+            min-width: 300px;
+            border-radius: 10px;
         }
     }
 }

@@ -67,10 +67,18 @@ const Dash = () => {
                             {profileInformation.is_tutor ? <h2>What would you like to tutor or learn today?</h2>: <h2>What would you like to get tutored on today?</h2>}
                         </div>
                         <div className='classes-to-learn'>
-                            <h1>Get learning.</h1>
+                            {/* @ts-ignore */}
+                            {profileInformation.is_tutor ? <h1>Get learning or tutor someone.</h1>: <h1>Get learning.</h1>}
                             <div className='class-courses'>
                                 <div className='card'>
-                                    <h2>HJ</h2>
+                                    <h2>Mathematics</h2>
+                                    {/* @ts-ignore */}
+                                    {profileInformation.is_tutor ? (<></>): (<></>)}                                    
+                                </div>
+                                <div className='card'>
+                                    <h2>English</h2>
+                                    {/* @ts-ignore */}
+                                    {profileInformation.is_tutor ? (<></>): (<></>)}
                                 </div>
                             </div>
                         </div>
@@ -81,7 +89,7 @@ const Dash = () => {
             ) : (
                 <div className="loading-screen">
                     <h2>Loom.</h2>
-                    <h1>Error. You are not online.</h1>
+                    <h1>You are not online.</h1>
                 </div>
             )}
         </div>
