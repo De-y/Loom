@@ -63,6 +63,7 @@ const Dash = () => {
                             {/* <Image src={'/default_profile.svg'} alt="default_profile_image" width={100} height={100} className='image'/> */}
                             {/* @ts-ignore */}
                             <h1>Hello, {profileInformation.full_name.split(" ")[0]}!</h1>
+                            {/* @ts-ignore */}
                             {profileInformation.is_tutor ? <h2>What would you like to tutor or learn today?</h2>: <h2>What would you like to get tutored on today?</h2>}
                         </div>
                         <div className='classes-to-learn'>
@@ -78,7 +79,10 @@ const Dash = () => {
                     </div>
                 </>
             ) : (
-                <h1>You are offline.</h1>
+                <div className="loading-screen">
+                    <h2>Loom.</h2>
+                    <h1>Error. You are not online.</h1>
+                </div>
             )}
         </div>
     );
