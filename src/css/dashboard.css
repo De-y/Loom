@@ -25,6 +25,14 @@ body {
         font-family: 'Poppins-Semibold';
         font-size: 30px;
     }
+    .class-courses {
+        & {
+            display: inline-grid;
+        }
+        .card {
+            background-color: rgb(16, 16, 16);
+        }
+    }
 }
 
 .loading-screen {

@@ -68,13 +68,18 @@ const Dash = () => {
                         <div className='classes-to-learn'>
                             <h1>Get learning.</h1>
                             <div className='class-courses'>
+                                <div className='card'>
+                                    <h2>HJ</h2>
+                                </div>
                             </div>
                         </div>
 
                         {/* @ts-ignore */}
                     </div>
                 </>
-            ) : null}
+            ) : (
+                <h1>You are offline.</h1>
+            )}
         </div>
     );
 };
