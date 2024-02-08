@@ -83,8 +83,10 @@ const Dash = () => {
                                     spacesInformation ? (
                                         <>
                                         {Object.keys(spacesInformation).map((spaces) => (
+                                            // @ts-ignore
                                             <a key={spaces} href={spacesInformation[spaces].url} className='card'>
                                             <div className='card-content'>
+                                                {/* @ts-ignore */}
                                                 <h1>{spacesInformation[spaces].name}</h1>
                                             </div>
                                             </a>                                            
