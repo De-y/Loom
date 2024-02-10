@@ -79,7 +79,7 @@ export default async function space({ params }: { params: { id: string } }) {
     return (
         <>
         <div className='tutoringlearn'>
-            <h1>Spaces / {currentSpace.name}</h1>
+            <h1>{currentSpace.name}</h1>
         </div>
         {isTutor ? (<>
                 <div className='tutor-btn'>

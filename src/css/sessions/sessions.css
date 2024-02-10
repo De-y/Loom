@@ -4,7 +4,7 @@ body {
 
 .tutoringlearn {
     & {
-        font-family: 'Poppins-SemiBold';
+        font-family: 'Poppins-Logo';
         font-size: 30px;
         text-align: center;
         padding: 25px;
@@ -22,6 +22,7 @@ body {
             width: 90%;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            user-select: none;
         }
         .card {
             & {
