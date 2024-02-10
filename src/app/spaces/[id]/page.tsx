@@ -5,11 +5,11 @@ import { createSecretKey } from "crypto";
 import 'dotenv/config'
 import { redirect } from 'next/navigation';
 import '@/css/sessions/sessions.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios'
-
+import UseSession from '@/components/createSession';
 export default async function space({ params }: { params: { id: string } }) {
+    function dialogue() {
+
+    }
     const cookieStore = cookies().get('authorization')?.value
     if (cookieStore == undefined) {
         redirect('/logout')
@@ -82,9 +82,7 @@ export default async function space({ params }: { params: { id: string } }) {
             <h1>{currentSpace.name}</h1>
         </div>
         {isTutor ? (<>
-                <div className='tutor-btn'>
-                    <a href="/"><FontAwesomeIcon icon={faPlus} /> Create a New Session</a>
-                </div>
+                    <UseSession />
             </>) : null
         }
         {isTutor ? (<>

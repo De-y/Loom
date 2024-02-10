@@ -60,6 +60,62 @@ body {
     position: absolute;
 }
 
+#dialog {
+    & {
+        background-color: rgb(39, 39, 39);
+        z-index: 3;
+        position: absolute;
+        color: white;
+        border-radius: 5px;
+        min-width: 350px;
+        max-width: 500px;
+        min-height: 600px;
+        max-height: 1000px;
+    }
+    .createSessionContent {
+        & {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 100%;
+            text-align: center;
+        }
+        .confirm {
+            font-family: 'Poppins-SemiBold';
+            font-size: 20px;
+        }
+        form {
+            & {
+                display: grid;
+                width: 90%;
+                gap: 15px;
+                margin: auto;
+            }
+            select {
+                background-color: rgb(26, 26, 26);
+                border-radius: 5px;
+                text-align: center;
+                padding: 5px;
+
+            }
+            input {
+                background-color: rgb(26, 26, 26);
+                text-align: center;
+                border-radius: 5px;
+                color: rgb(255, 255, 255);
+                padding: 5px;
+            }
+            button {
+                background-color: rgb(30, 30, 30);
+                border-radius: 5px;
+                padding: 10px;
+            }
+        }
+
+    }
+}
+
 .invalid-loom-space {
     & {
         position: absolute;
@@ -91,10 +147,17 @@ body {
         text-align: right;
         transform: translateX(-10%);
     }
-    a {
+    button {
         background-color: rgb(38, 38, 38);
         border-radius: 5px;
         padding: 5px;
+        transition: 500ms;
+    }
+    button:hover {
+        background-color: rgb(57, 57, 57);
+    }
+    button:active {
+        background-color: rgb(164, 164, 164);
     }
 }
 
