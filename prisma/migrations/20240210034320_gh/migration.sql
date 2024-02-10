@@ -6,7 +6,7 @@ CREATE TABLE "user" (
     "password" STRING NOT NULL,
     "name" STRING NOT NULL,
     "age" STRING NOT NULL,
-    "permission" STRING NOT NULL DEFAULT 'user',
+    "permission" INT4 NOT NULL DEFAULT 1,
     "verified" BOOL NOT NULL DEFAULT false,
     "tutor" BOOL NOT NULL DEFAULT false,
     "saltA" STRING NOT NULL,

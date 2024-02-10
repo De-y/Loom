@@ -24,7 +24,7 @@ async function createAdministratorAccount() {
         'saltB': saltB,
         'verified': true,
         'tutor': true,
-        'permission': "admin",
+        'permission': 3,
         'password': createHash('SHA3-512').update(`${saltA}${password_rei}${saltB}`).digest('hex'),
       }})
     console.log(userService)

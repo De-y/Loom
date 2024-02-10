@@ -43,20 +43,39 @@ export default async function space({ params }: { params: { id: string } }) {
             // @ts-ignore
             currentSpace = e[i]
         }
-        else {
-            if (currentSpace == undefined) {
-                return (
-                    <>
-                        <div className='invalid-loom-space'>
-                            <h1>This space does not exist.</h1>
-                            <br />
-                            <a href='/spaces'>Return to Spaces</a>
-                        </div>
-                    </>
-                )
+    }
+    if (currentSpace == undefined) {
+        return (
+            <>
+                <div className='invalid-loom-space'>
+                    <h1>This space does not exist.</h1>
+                    <br />
+                    <a href='/spaces'>Return to Spaces</a>
+                </div>
+            </>
+        )
+    }
+    let profileLookupService = await db.profile.findFirst({where: {
+        'relatedUsername': accountLookupService['username']
+    }})
+    if (profileLookupService.certifications == undefined) {
+        for (let certifications in profileLookupService.certifications) {
+            if (certifications != currentSpaceID) {
+                if (accountLookupService.permission >= 2) {
+                    isTutor = true;
+                } else {
+                    isTutor = false;
+                }        
             }
         }
-    }   
+    } else {
+        if (accountLookupService.permission >= 2) {
+            isTutor = true;
+        } else {
+            isTutor = false;
+        }
+    }
+
     return (
         <>
         <div className='tutoringlearn'>

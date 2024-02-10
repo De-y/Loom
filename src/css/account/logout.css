@@ -3,3 +3,17 @@ body {
     background-color: black;
     color: white;
 }
+
+.loggingout {
+    & {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Poppins-SemiBold';
+        font-size: 20px;
+    }
+    .loom-load {
+        color: white;
+    }
+}

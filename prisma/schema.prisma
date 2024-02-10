@@ -17,7 +17,7 @@ model user {
   password String
   name String
   age String
-  permission String @default("user")
+  permission Int @default(1)
   verified Boolean @default(false)
   tutor Boolean @default(false)
   saltA String

@@ -1,20 +1,29 @@
-"use client";
-
+'use client'
 import '@/css/account/logout.css'
 import { deleteCookie } from "cookies-next";
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
+import { CircularProgress } from '@mui/material';
+
 export default function logOut() {   
     try {
+        deleteCookie('authorization')
+        useEffect(() => {
+            redirect('/login')
+        })
         return (
-            deleteCookie('authorization'),
-            // @ts-ignore
-            useEffect(() => {
-                redirect('/login')
-            }),
-            <h1>Logging Out...</h1>
+            <>
+                <div className='loggingout'>
+                    <h1>Loom is logging you out.</h1>
+                    <br />
+                    <div className='loader'>
+                        <CircularProgress className='loom-load'/>                    
+                    </div>
+                </div>
+            </>
         )
     } catch (err) {
+        console.log(err)
         return (
             deleteCookie('authorization')
         )
