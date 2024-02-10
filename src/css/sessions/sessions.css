@@ -11,6 +11,54 @@ body {
     }
 }
 
+.sessions {
+    & {
+        text-align: center;
+    }
+
+    .sessions-cd {
+        & {
+            display: inline-grid;
+            width: 90%;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            & {
+                background-color: rgb(35, 35, 35);
+                margin: auto;
+                border-radius: 5px;
+                min-width: 300px;
+                max-width: 500px;
+                vertical-align: middle;
+                min-height: 200px;
+                display: flex;
+                justify-content: center;
+            }
+            h1 {
+                font-size: 20px;
+                font-family: 'Poppins-SemiBold';
+            }
+            .card-content {
+                width: 90%;
+                margin: auto;
+            }
+        }
+    }
+}
+
+.live-pill {
+    display: inline;
+    background-color: rgba(244, 47, 47, 0.91);
+    height: fit-content;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100px;
+    transform: translate(180%, 50%);
+    position: absolute;
+}
+
 .invalid-loom-space {
     & {
         position: absolute;
@@ -54,6 +102,19 @@ body {
         & {
             text-align: center;
             transform: translateX(0px);
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .sessions-cd {
+        & {
+            width: 100%;
+        }
+        .card {
+            min-width: none;
+            max-width: none;
+            width: 90%;
         }
     }
 }

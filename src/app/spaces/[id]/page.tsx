@@ -88,12 +88,38 @@ export default async function space({ params }: { params: { id: string } }) {
             </>) : null
         }
         {isTutor ? (<>
+            <br />
             <div className='sessions'>
                 <h1>Your Sessions</h1>
+                <div className='sessions-cd'>
+                    <div className='card'>
+                        <div className='card-content'>
+                            <h1>No sessions created.</h1>
+                            <p>Click Create a new session to make a new session</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>) : null}
+        <br />
         <div className='sessions'>
-        <h1>Available Sessions</h1>
+            <h1>Open Sessions</h1>
+            <br />
+            <div className='sessions-cd'>
+                <div className='united-card'>
+                    <a className='card' href="/spaces/sessions">
+                        <div className='live-pill'>
+                                <h2>ENDED</h2>
+                        </div>
+                        <div className='card-content'>
+                            <h1>Session Name</h1>
+                            <h2>By sessionAuthor</h2>
+                            <h3>On sessionDate</h3>
+                            <h4>From tStart - tEnd</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
 
         </>
