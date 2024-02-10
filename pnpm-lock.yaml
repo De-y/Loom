@@ -101,6 +101,9 @@ dependencies:
   react:
     specifier: ^18
     version: 18.2.0
+  react-detect-offline:
+    specifier: ^2.4.5
+    version: 2.4.5
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
@@ -3819,6 +3822,10 @@ packages:
   /quick-lru@5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
+    dev: false
+
+  /react-detect-offline@2.4.5:
+    resolution: {integrity: sha512-sI13NPEKl3uQp95FT5CwrYzH3DnXCwNP6TnY6NRF5gFDM4NU9KDlbtA6HG2dwhDVS0RYQGXwZW/mHbdf8fCnaw==}
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):

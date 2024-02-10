@@ -3,12 +3,15 @@
 import '@/css/account/logout.css'
 import { deleteCookie } from "cookies-next";
 import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
 export default function logOut() {   
     try {
         return (
             deleteCookie('authorization'),
             // @ts-ignore
-            window.location = '/login',
+            useEffect(() => {
+                redirect('/login')
+            }),
             <h1>Logging Out...</h1>
         )
     } catch (err) {

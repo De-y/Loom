@@ -1,0 +1,59 @@
+body {
+    background-color: rgb(20, 20, 20);
+}
+
+.tutoringlearn {
+    & {
+        font-family: 'Poppins-SemiBold';
+        font-size: 30px;
+        text-align: center;
+        padding: 25px;
+    }
+}
+
+.invalid-loom-space {
+    & {
+        position: absolute;
+        font-family: 'Poppins-SemiBold';
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    a {
+        background-color: black;
+        padding: 10px;
+        border-radius: 7.5px;
+        transition: 500ms;
+        font-size: 20px;
+    }
+    a:hover {
+        background-color: bisque;
+        color: black;
+    }
+}
+
+.tutor-btn {
+    & {
+        text-align: right;
+        transform: translateX(-10%);
+    }
+    a {
+        background-color: rgb(38, 38, 38);
+        border-radius: 5px;
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .tutor-btn {
+        & {
+            text-align: center;
+            transform: translateX(0px);
+        }
+    }
+}
