@@ -1,6 +1,6 @@
 import LogoutIt from '@/components/logout'
 
-export default function serverlogout() {   
+export default async function serverlogout() {   
     return (
         <>
             {/* @ts-ignore */}
