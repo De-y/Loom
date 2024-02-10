@@ -107,7 +107,7 @@ export default async function space({ params }: { params: { id: string } }) {
             <br />
             <div className='sessions-cd'>
                 <div className='united-card'>
-                    <a className='card' href="/spaces/sessions">
+                    <a className='card' href="/sessions/">
                         <div className='live-pill'>
                                 <h2>ENDED</h2>
                         </div>
