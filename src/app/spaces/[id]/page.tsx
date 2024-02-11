@@ -7,9 +7,7 @@ import { redirect } from 'next/navigation';
 import '@/css/sessions/sessions.css'
 import UseSession from '@/components/createSession';
 export default async function space({ params }: { params: { id: string } }) {
-    function dialogue() {
-
-    }
+    // Authenticate
     const cookieStore = cookies().get('authorization')?.value
     if (cookieStore == undefined) {
         redirect('/logout')
@@ -75,11 +73,48 @@ export default async function space({ params }: { params: { id: string } }) {
             isTutor = false;
         }
     }
+    async function tutoringfilterer(session: any) {
+        if (parseInt(session.sessionTime) <= (new Date().getTime() / 1000) || session.ended != false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    let sessionsList = await db.session.findMany({where: {
+        'hostUsername': accountLookupService['username'],
+        'spaceID': currentSpaceID
+    }})
 
+    async function sessionsFilterer(s: any) {
+        let better_l = []
+        for (let i in s) {
+            let session = s[i]
+            if (parseInt(session.sessionTime) >= (new Date().getTime() / 1000) || session.ended != false) {
+                if (((new Date().getTime() / 1000) + (604800 * 10)) >= session.sessionTime) {
+                    better_l.push(session)
+                } else {
+                    continue
+                }
+            } else {
+                continue
+            }
+        }
+        return better_l;
+    }
+    
+    let openSessions = await db.session.findMany({
+        where: {
+            'ended': false,
+            'spaceID': currentSpaceID,
+        }
+    })
+    openSessions = (await sessionsFilterer(openSessions))
+    sessionsList = (await sessionsFilterer(sessionsList))
     return (
         <>
         <div className='tutoringlearn'>
             <h1>{currentSpace.name}</h1>
+            <a href='/dashboard'>Return to Dashboard</a>
         </div>
         {isTutor ? (<>
                     <UseSession />
@@ -88,14 +123,29 @@ export default async function space({ params }: { params: { id: string } }) {
         {isTutor ? (<>
             <br />
             <div className='sessions'>
-                <h1>Your Sessions</h1>
+                <h1>Your Current Sessions:</h1>
+                <br />
                 <div className='sessions-cd'>
-                    <div className='card'>
-                        <div className='card-content'>
-                            <h1>No sessions created.</h1>
-                            <p>Click Create a new session to make a new session</p>
-                        </div>
-                    </div>
+                    {(sessionsList.length > 0) ? (<>
+                    {Object.keys(sessionsList).map((sessions) => (
+                        <a key={sessions} className='card' href={`/sessions/${sessionsList[sessions].id}`}>
+                            <div className='card-content'>
+                                <h1>{sessionsList[sessions].sessionName}</h1>
+                                <h3>On {new Date(sessionsList[sessions].sessionTime * 1000).toDateString()}</h3>
+                                <h4>From {`${new Date(sessionsList[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((openSessions[sessions].sessionTime + openSessions[sessions].sessionDuration * 60) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
+                                <h4>Registered Students (Including yourself): {sessionsList[sessions].registeredUsers}/{sessionsList[sessions].maxUsers}</h4>
+                            </div>
+                        </a>                   
+                    ))}
+                    </>) : (<>
+                        <div className='card'>
+                            <div className='card-content'>
+                                <h1>No sessions created.</h1>
+                                <p>Click create a new session to create a new session.</p>
+                            </div>
+                        </div>                   
+                    </>)
+                    }
                 </div>
             </div>
         </>) : null}
@@ -104,22 +154,28 @@ export default async function space({ params }: { params: { id: string } }) {
             <h1>Open Sessions</h1>
             <br />
             <div className='sessions-cd'>
-                <div className='united-card'>
-                    <a className='card' href="/sessions/">
-                        <div className='live-pill'>
-                                <h2>ENDED</h2>
-                        </div>
-                        <div className='card-content'>
-                            <h1>Session Name</h1>
-                            <h2>By sessionAuthor</h2>
-                            <h3>On sessionDate</h3>
-                            <h4>From tStart - tEnd</h4>
-                        </div>
-                    </a>
+                {(openSessions.length > 0) ? (<>
+                    {Object.keys(openSessions).map((sessions) => (
+                            <a key={sessions} className='card' href={`/sessions/${openSessions[sessions].id}`}>
+                                <div className='card-content'>
+                                    <h1>{openSessions[sessions].sessionName}</h1>
+                                    <h2>Hosted by @{openSessions[sessions].hostUsername}</h2>
+                                    <h3>On {new Date(openSessions[sessions].sessionTime * 1000).toDateString()}</h3>
+                                    <h4>From {`${new Date(openSessions[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((openSessions[sessions].sessionTime + openSessions[sessions].sessionDuration * 60) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
+                                    <h4>Registered Students: {openSessions[sessions].registeredUsers}/{openSessions[sessions].maxUsers}</h4>
+                                </div>
+                            </a>                    
+                    ))}
+                </>) : (<>
+                    <div className='card'>
+                            <div className='card-content'>
+                                <h1>No sessions available.</h1>
+                                <p>Well, this is embarrasing. Please check back later.</p>
+                            </div>
+                        </div>                   
+                </>)}
                 </div>
             </div>
-        </div>
-
         </>
     )
 }

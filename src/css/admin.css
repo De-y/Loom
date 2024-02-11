@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+    color: white;
+    width: 100%;
+}
+
+table, th, td {
+    border-color: rgb(255, 255, 255);
+    border: 1px solid;
+}
+
+input {
+    color: black;
+    width: 200px;
+    margin: auto;
+}
+
+form {
+    width: 100%;
+    text-align: center;
+    display: grid;
+}
+
+#submit {
+    background-color: rgb(42, 42, 42);
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+}

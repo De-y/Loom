@@ -26,7 +26,6 @@ export default function Apply() {
                     if (data.authenticated) {
                         if (data.profileInformation.verified == false) {
                             console.log("[*] Identity Central. Your application is processing.");
-                            setProfileInformation(data.profileInformation);
                         } else {
                             // @ts-ignore
                             Router.push('/dashboard')

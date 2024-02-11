@@ -35,3 +35,15 @@ model profile {
   sessionsAttended Int @default(0)
   sessionsHosted Int @default(0)
 }
+
+model session {
+  id  Int @id @default(sequence())
+  sessionName String
+  sessionTime String
+  sessionDuration Int
+  maxUsers Int
+  hostUsername String
+  spaceID Int
+  ended Boolean @default(false)
+  registeredUsers Int @default(1)
+}
