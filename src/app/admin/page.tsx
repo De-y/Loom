@@ -11,6 +11,7 @@ export default async function admin() {
     if (cookieStore == undefined) {
         redirect('/logout')
     }
+    // @ts-ignore
     let decision = await jwt.jwtVerify(cookieStore, createSecretKey(process.env.JWT_Secret, 'utf-8'))
     let accountLookupService = await db.user.findFirst({
         where: {

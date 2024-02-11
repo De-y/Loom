@@ -41,7 +41,9 @@ export default function UseSession() {
                     router.push(responseInformation.sessionPage)
                 } else {
                     let error = document.getElementById('error')
+                    // @ts-ignore
                     error.style.display = 'inline';
+                    // @ts-ignore
                     error.innerHTML = responseInformation.status;
                 }
             })
