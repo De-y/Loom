@@ -25,33 +25,7 @@ export async function POST(request: Request) {
         // @ts-ignore
         if (decision.payload.aud == 'Loom' && accountLookupService != null && decision?.payload.exp * 1000 >= new Date().getTime()) {
             let l = await db.sessionRegistrations.findFirst({'where': {'studentID': accountLookupService.id}})
-            if (l == null || l == undefined || accountLookupService.permission >= 3) {
-                let data = await db.session.findFirst({
-                    'where': {
-                        'id': parseInt(id)                    }
-                })
-                if ((data.registeredUsers + 1) >= data.maxUsers) {
-                    return NextResponse.json({
-                        'status': 'Could not register'
-                    })
-                }
-                await db.sessionRegistrations.create({
-                    'data': {
-                        'studentID': accountLookupService.id,
-                        'sessionID': parseInt(id),
-                    }
-                })
-                await db.session.update({
-                    'where': {
-                        'id': parseInt(id)
-                    },
-                    'data': {
-                        'registeredUsers': parseInt(data.registeredUsers) + 1,
-                    }
-                })
-                return NextResponse.json({'status': 'OK'}, {'status' : 201})
-            }
-            return NextResponse.json({'status': 'You are already registered!'})
+            return NextResponse.json({'info': l})
         }
     } catch (err) {
         console.log(err)

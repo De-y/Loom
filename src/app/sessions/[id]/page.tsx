@@ -30,7 +30,7 @@ export default async function sessionInformation({ params }: { params: { id: str
     let sessionData = await db.session.findFirst({where: {
         'id': parseInt(params.id)
     }});
-    console.log(sessionData)
+    console.log(accountLookupService['id'])
     let date = new Date(sessionData.sessionTime * 1000)
     var monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var dayOfWeek = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -46,10 +46,9 @@ export default async function sessionInformation({ params }: { params: { id: str
         'username': sessionData.hostUsername,
     }})
     let sessionRegistered = await db.sessionRegistrations.findFirst({'where': {
-        'studentID': accountLookupService.id,
+        'studentID': accountLookupService['id'],
         'sessionID': parseInt(params.id)
     }})
-    console.log(sessionRegistered)
     return (
         <>
             <div className="sessionInformation">
@@ -60,7 +59,7 @@ export default async function sessionInformation({ params }: { params: { id: str
                     <h4>On {day}, {month} {date.getDate()}</h4>
                     <h5>From {h_m} till {adj_h_m}</h5>
                     <h6>{sessionData.ended ? "Ended" : "Not Ended"}</h6>
-                    {(sessionRegistered != null || sessionRegistered != undefined) ? (<h1>Registered!</h1>) : (<JoinSession />)}
+                    <JoinSession />
                 </div>
             </div>
         </>
