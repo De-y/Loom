@@ -176,6 +176,7 @@ export default async function space({ params }: { params: { id: string } }) {
                 </>)}
                 </div>
             </div>
+            <br />
         </>
     )
 }

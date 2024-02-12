@@ -47,3 +47,9 @@ model session {
   ended Boolean @default(false)
   registeredUsers Int @default(1)
 }
+
+model sessionRegistrations {
+  id String @id @default(cuid())
+  sessionID Int
+  studentID String
+}

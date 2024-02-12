@@ -2,3 +2,67 @@ body {
     background-color: black;
     color: white;
 }
+
+.signup {
+    & {
+        background-color: rgb(23, 23, 23);
+        border-radius: 5px;
+        padding: 5px;
+        transition: 500ms;    
+    }
+    &:hover {
+        background-color: black;
+    }
+}
+.sessionInformation {
+    & {
+        background-color: rgb(36, 36, 36);
+        min-width: 400px;
+        max-width: 600px;
+        position: absolute;
+        left: 50px;
+        top: 100px;
+        min-height: 400px;
+    }
+    .si {
+        & {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        h1 {
+            font-family: 'Poppins-SemiBold';
+            font-size: 50px;
+        }
+        h2 {
+            font-size: 20px;
+        }
+        h3 {
+            font-size: 20px;
+        }
+        h4 {
+            font-size: 20px;
+        }
+        h5 {
+            font-size: 20px;
+        }
+        h6 {
+            font-size: 20px;
+        }    
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sessionInformation {
+        & {
+            left: auto;
+            top: auto;
+            max-width: none;
+            min-width: none;
+            text-align: center;
+            position: relative;
+            display: block;
+        }
+    }
+}
