@@ -45,10 +45,11 @@ export default async function sessionInformation({ params }: { params: { id: str
     let x = await db.user.findFirst({'where': {
         'username': sessionData.hostUsername,
     }})
-    let sessionRegistered = db.sessionRegistrations.findFirst({'where': {
+    let sessionRegistered = await db.sessionRegistrations.findFirst({'where': {
         'studentID': accountLookupService.id,
         'sessionID': parseInt(params.id)
     }})
+    console.log(sessionRegistered)
     return (
         <>
             <div className="sessionInformation">
@@ -59,7 +60,7 @@ export default async function sessionInformation({ params }: { params: { id: str
                     <h4>On {day}, {month} {date.getDate()}</h4>
                     <h5>From {h_m} till {adj_h_m}</h5>
                     <h6>{sessionData.ended ? "Ended" : "Not Ended"}</h6>
-                    {(sessionData != null || sessionData != undefined) ? null : (<JoinSession />)}
+                    {(sessionRegistered != null || sessionRegistered != undefined) ? (<h1>Registered!</h1>) : (<JoinSession />)}
                 </div>
             </div>
         </>
