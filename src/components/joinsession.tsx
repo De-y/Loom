@@ -72,7 +72,8 @@ export default function JoinSession({id}: any) {
         }).then((req) => {
             req.json().then((res) => {
                 // @ts-ignore
-                if (res.status != "Not yet") {
+                console.log(res)
+                if (res.status == "Yes") {
                     setmeetingJoin(true);
                     // @ts-ignore
                     setmeetingURL("rvre")

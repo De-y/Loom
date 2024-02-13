@@ -30,6 +30,7 @@ export async function POST(request: Request) {
                     'studentID': accountLookupService.id
                 }
             })     
+            console.log(parseInt(id))   
             if (s_id != null) {
                 let m_id = await db.session.findFirst({
                     'where': {
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
                 if (((m_id.sessionTime - (60 * 10)) * 1000 <= l) == false) {
                     return NextResponse.json({'status': 'Not yet'})
                 }
-                return NextResponse.json({'e': 'e'})
+                return NextResponse.json({'status': 'Yes'})
             }
             return NextResponse.json({'e': 'e'})
         } else {
