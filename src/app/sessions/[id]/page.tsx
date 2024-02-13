@@ -68,7 +68,7 @@ export default async function sessionInformation({ params }: { params: { id: str
                         {
                             (host == true || accountLookupService.permission >= 3) ? (<><h1>Yes</h1></>) : null
                         }
-                        <JoinSession id={params.id} url={`http://${headers().get("referer")?.split('/')[2]}`}/>
+                        <JoinSession id={params.id} url={``}/>
                     </div>
                 </div>
             </>
