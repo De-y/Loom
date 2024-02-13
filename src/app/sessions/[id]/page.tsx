@@ -66,9 +66,17 @@ export default async function sessionInformation({ params }: { params: { id: str
                         <h5>From {h_m} till {adj_h_m}</h5>
                         <h6>{sessionData.ended ? "Ended" : "Not Ended"}</h6>
                         {
-                            (host == true || accountLookupService.permission >= 3) ? (<><h1>Yes</h1></>) : null
+                            (host == true || accountLookupService.permission >= 3) ? (<>
+                                {sessionData.ended ? null : (
+                                    <>
+                                        <br />
+                                        <a className="signup" href={`/sessions/edit/${params.id}`}>Edit Session</a>
+                                        <br />
+                                    </>
+                                )}
+                            </>) : null
                         }
-                        <JoinSession id={params.id} url={``}/>
+                        <JoinSession id={params.id} />
                     </div>
                 </div>
             </>

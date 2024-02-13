@@ -6,7 +6,8 @@ import db from '@/db/prisma';
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
-export default function JoinSession({id, url}: any) {
+export default function JoinSession({id}: any) {
+    let url = ''
     const [cl, setCl] = useState(null);
     const [el, setEl] = useState(null);
     const [endedecidor, setEndedDecisor] = useState(false);
@@ -25,56 +26,58 @@ export default function JoinSession({id, url}: any) {
             })
         })
     }
-    fetch(url + '/api/profile', {
-        'method': 'POST',
-        'body': JSON.stringify({
-            'token': getCookie('authorization')
-        })
-    }).then((ex) => {
-        ex.json().then((cl) => {
-            fetch(url + '/api/sessions/check_registration', {
-                'method': 'POST',
-                'body': JSON.stringify({
-                    'token': getCookie('authorization')
-                })
-            }).then((mr) => {
-                mr.json().then((ec) => {
-                    if (ec.info == null) {
-                        // @ts-ignore
-                        setEl('JSP')
-                    }
+    useEffect(() => {
+        fetch(url + '/api/profile', {
+            'method': 'POST',
+            'body': JSON.stringify({
+                'token': getCookie('authorization')
+            })
+        }).then((ex) => {
+            ex.json().then((cl) => {
+                fetch(url + '/api/sessions/check_registration', {
+                    'method': 'POST',
+                    'body': JSON.stringify({
+                        'token': getCookie('authorization')
+                    })
+                }).then((mr) => {
+                    mr.json().then((ec) => {
+                        if (ec.info == null) {
+                            // @ts-ignore
+                            setEl('JSP')
+                        }
+                    })
                 })
             })
         })
-    })
-    fetch(url + '/api/sessions/check_session', {
-        'method': 'POST',
-        'body': JSON.stringify({
-            'id': id
+        fetch(url + '/api/sessions/check_session', {
+            'method': 'POST',
+            'body': JSON.stringify({
+                'id': id
+            })
+        }).then((res) => {
+            res.json().then((ens) => {
+                if (ens.meetingEnded != false && el != null) {
+                    setEndedDecisor(false)
+                } else {
+                    setEndedDecisor(false)
+                }
+            })
         })
-    }).then((res) => {
-        res.json().then((ens) => {
-            if (ens.meetingEnded != false && el != null) {
-                setEndedDecisor(false)
-            } else {
-                setEndedDecisor(false)
-            }
-        })
-    })
-    fetch(url + '/api/meetings/get', {
-        'method': 'POST',
-        'body': JSON.stringify({
-            'token': getCookie('authorization'),
-            'sessionID': id,
-        })
-    }).then((req) => {
-        req.json().then((res) => {
-            // @ts-ignore
-            if (res.status != "Not yet") {
-                setmeetingJoin(true);
+        fetch(url + '/api/meetings/get', {
+            'method': 'POST',
+            'body': JSON.stringify({
+                'token': getCookie('authorization'),
+                'sessionID': id,
+            })
+        }).then((req) => {
+            req.json().then((res) => {
                 // @ts-ignore
-                setmeetingURL("rvre")
-            }
+                if (res.status != "Not yet") {
+                    setmeetingJoin(true);
+                    // @ts-ignore
+                    setmeetingURL("rvre")
+                }
+            })
         })
     })
     return (
