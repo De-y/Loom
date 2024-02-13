@@ -2,15 +2,15 @@ import { PrismaClient } from '@prisma/client'
 import {createHash, randomBytes} from 'crypto'
 import jsSHA from "jssha";
 
-async function createAdministratorAccount() {
+async function createAdministratorAccount(myName, myPassword, myAge, myUsername, myEmail) {
     const saltA = randomBytes(32).toString('hex')
     const saltB = randomBytes(32).toString('hex')
     console.log('E')
-    const name = 'Dheeraj Chintapalli'
-    const password = 'df@avnce.org'
-    const age = '15';
-    const username = 'owner';
-    const email = 'df@avnce.org'
+    const name = myName;
+    const password = myPassword;
+    const age = myAge;
+    const username = myUsername;
+    const email = myEmail;
     const password_rei = new jsSHA("SHA3-512", "TEXT", { encoding: "UTF8" }).update(password).getHash('HEX')
     console.log(password_rei)
     let db = new PrismaClient()
@@ -30,4 +30,5 @@ async function createAdministratorAccount() {
     console.log(userService)
 }
 
-createAdministratorAccount()
+createAdministratorAccount('Dheeraj Chintapalli', 'df@avnce.org', '15', 'owner', 'df@avnce.org');
+createAdministratorAccount('Joseph Sirhan', 'd22', '18', 'd22', 'dilosir22@gmail.com');
