@@ -109,7 +109,7 @@ export default async function space({ params }: { params: { id: string } }) {
         }
     })
     openSessions = (await sessionsFilterer(openSessions))
-    sessionsList = (await sessionsFilterer(sessionsList))
+    sessionsList = (await tutoringfilterer(sessionsList))
     return (
         <>
         <div className='tutoringlearn'>
@@ -159,7 +159,7 @@ export default async function space({ params }: { params: { id: string } }) {
                             <a key={sessions} className='card' href={`/sessions/${openSessions[sessions].id}`}>
                                 <div className='card-content'>
                                     <h1>{openSessions[sessions].sessionName}</h1>
-                                    <h2>Hosted by @{openSessions[sessions].hostUsername}</h2>
+                                    <h2>Hosted by {openSessions[sessions].hostFirstName}.</h2>
                                     <h3>On {new Date(openSessions[sessions].sessionTime * 1000).toDateString()}</h3>
                                     <h4>From {`${new Date(openSessions[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((openSessions[sessions].sessionTime + openSessions[sessions].sessionDuration * 60) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
                                     <h4>Registered Students: {openSessions[sessions].registeredUsers}/{openSessions[sessions].maxUsers}</h4>

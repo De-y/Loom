@@ -43,6 +43,7 @@ model session {
   sessionDuration Int
   maxUsers Int
   hostUsername String
+  hostFirstName String
   spaceID Int
   ended Boolean @default(false)
   registeredUsers Int @default(1)

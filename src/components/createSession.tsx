@@ -49,6 +49,7 @@ export default function UseSession() {
             })
         })
     }
+    let oy = new Date().toLocaleDateString().split('T')[0].split('/')
     return (
         <>
                 <dialog id='dialog'>
@@ -62,7 +63,7 @@ export default function UseSession() {
                             <label htmlFor="session_t">Session Time Starts (Local Time):</label>
                             <input type='time' placeholder='Session Time' id="session_t" required/>
                             <label htmlFor="session_date">Session Date:</label>
-                            <input type='date' min={new Date().toLocaleDateString().split('T')[0]}  placeholder='Session Date' id="session_date" required/>
+                            <input type='date' min={new Date().toLocaleDateString().split('T')[0]} max={`${oy[0]}/${oy[1]}/${(parseInt(oy[2]) + 1).toString()}`}  placeholder='Session Date' id="session_date" required/>
                             <label htmlFor="session_d">Session Duration (Minutes):</label>
                             <select id='session_d' required>
                                 <option value="15">15</option>

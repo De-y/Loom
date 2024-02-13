@@ -55,18 +55,27 @@ export async function POST(request: Request) {
                         'status': 400,
                     })    
                 }
-                let l = await db.session.create({data: {
-                    'sessionName': coreInformation.name,
-                    'sessionTime': coreInformation.destinedTime.toString(),
-                    'sessionDuration': parseInt(coreInformation.duration),
-                    'spaceID': parseInt(credentialsIdentity),
+                if ((new Date(coreInformation.destinedTime * 1000).getUTCFullYear() <= (new Date().getUTCFullYear() + 1))) {
+                    if ((new Date(coreInformation.destinedTime * 1000).getUTCMonth() == new Date().getUTCMonth()) == false) {
+                        return NextResponse.json({'status': 'Start date must be within a full year and date of today.'})
+                    }
+                    let l = await db.session.create({data: {
+                        'sessionName': coreInformation.name,
+                        'sessionTime': coreInformation.destinedTime.toString(),
+                        'sessionDuration': parseInt(coreInformation.duration),
+                        'spaceID': parseInt(credentialsIdentity),
+                        // @ts-ignore
+                        'hostUsername': decision?.payload.id,
+                        'hostFirstName': `${accountLookupService.name.split(' ')[0]} ${accountLookupService.name.split(' ')[accountLookupService.name.split(' ').length - 1][0]}`,
+                        'maxUsers': parseInt(coreInformation.max_users),
+                    }})
                     // @ts-ignore
-                    'hostUsername': decision?.payload.id,
-                    'maxUsers': parseInt(coreInformation.max_users)
-                }})
-                // @ts-ignore
-                // USE ${l.id} BELOW
-                return NextResponse.json({'status': 'OK', 'sessionPage': `/sessions/${l.id}`}, {'status': 202})
+                    // USE ${l.id} BELOW
+                    return NextResponse.json({'status': 'OK', 'sessionPage': `/sessions/${l.id}`}, {'status': 202})
+                }
+                return NextResponse.json({'status': 'You do not have permissions to create a session.'}, {
+                    'status': 403,
+                })
 
             } else {
                 return NextResponse.json({'status': 'You do not have permissions to create a session.'}, {
@@ -79,6 +88,7 @@ export async function POST(request: Request) {
             })
         }
     } catch (err) {
+        console.log(err)
         return NextResponse.json({'status': 'Your session is invalid.'}, {
             'status': 403,
         })

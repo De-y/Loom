@@ -7,6 +7,15 @@ body {
     font-size: 20px;
 }
 
+.signup-disabled {
+    & {
+        background-color: rgb(29, 25, 25);
+        border-radius: 5px;
+        padding: 5px;
+        transition: 500ms;
+        color: grey;   
+    }
+}
 .signup {
     & {
         background-color: rgb(23, 23, 23);
@@ -28,12 +37,16 @@ body {
         left: 50px;
         top: 100px;
         min-height: 500px;
+        text-align: center;
+        margin: auto;
+        align-items: center;
     }
     .si {
         & {
             position: absolute;
-            left: 50%;
+            margin: auto;
             top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
         }
         h1 {
