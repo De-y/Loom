@@ -1,6 +1,7 @@
 .navbar {
     & {
         background-color: rgb(31, 31, 31);
+        display: flex;
     }
     .logo {
         & {
@@ -16,6 +17,69 @@
         }
         a {
             user-select: none;
+        }
+    }
+    .userIcn {
+        & {
+            display: flex;
+            margin-left: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+            transform: translateX(-175%);
+            gap: 10px;
+        }
+        .userIcnA {
+            background-color: white;
+            border-radius: 100px;
+            height: 40px;
+            width: 40px;
+            float: right;
+        }
+    }
+}
+
+#profile-settings {
+    & {
+        border-radius: 7.5px;
+        background-color: rgb(35, 34, 34);
+    }
+    #pr-in {
+        & {
+            min-width: 375px;
+            max-width: 700px;
+            min-height: 400px;
+            max-height: 600px;
+            background-color: rgb(35, 34, 34);
+            color: white;
+            text-align: center;  
+        }
+        .prop {
+            & {
+                position: relative;
+                top: 20px;
+                margin: auto;    
+            }
+            h1 {
+                font-size: 50px;
+                font-family: 'Poppins-Logo';    
+            }
+            .options {
+                position: relative;
+                top: 20px;
+                display: grid;
+                gap: 10px;
+                width: 90%;
+                margin: auto;
+            }
+            a {
+                background-color: rgb(23, 23, 23);
+                border-radius: 7.5px;
+                padding: 10px;
+                transition: 500ms;
+            }
+            a:hover {
+                background-color: rgb(28, 28, 28);
+            }
         }
     }
 }

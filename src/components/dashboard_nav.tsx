@@ -1,16 +1,14 @@
 import '@/css/components/dashboard_navbar.css'
 import Image from 'next/image'
+import DashboardNavCli from './nav_dash'
+import { useState } from 'react'
+import db from '@/db/prisma'
+import { getCookie } from 'cookies-next'
 
 export default function DashboardNavbar() {
     return (
         <>
-            <div className='navbar'>
-                <div className='logo'>
-                    <a href="/"><Image alt="Loom Logo" width={50} height={50} src={'/loom.png'}/></a>
-                    <a href='/' className='loom-lg'>Loom.</a>
-                </div>
-                <a href="/logout">Logout</a>
-            </div>
+            <DashboardNavCli/>
         </>
     )
 }

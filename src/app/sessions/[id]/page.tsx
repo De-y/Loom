@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { redirect } from "next/navigation";
 import '@/css/sessions/sessionpage.css'
 import JoinSession from '@/components/joinsession'
+import DashboardNavbar from "@/components/dashboard_nav";
 
 export default async function sessionInformation({ params }: { params: { id: string } }) {
     try {
@@ -31,6 +32,16 @@ export default async function sessionInformation({ params }: { params: { id: str
         let sessionData = await db.session.findFirst({where: {
             'id': parseInt(params.id)
         }});
+        if ((((sessionData.sessionTime + (sessionData.sessionDuration/60)) * 1000) <= new Date().getTime()) == true) {
+            await db.session.update({
+                'where': {
+                    'id': parseInt(params.id)
+                },
+                'data': {
+                    'ended': true,
+                }
+            })
+        }
         let date = new Date(sessionData.sessionTime * 1000)
         var monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var dayOfWeek = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -41,12 +52,9 @@ export default async function sessionInformation({ params }: { params: { id: str
         var adjustedTime = new Date(((sessionData.sessionTime / 60) + sessionData.sessionDuration) * 60 * 1000)
         let adj_a_p = (adjustedTime.getHours() < 12) ? "AM" : "PM";
         let l_hr_min = adjustedTime.getHours()
-        if (am_or_pm == 'PM') {
-            hour = hour - 12;
-            l_hr_min = l_hr_min - 12;
-        }
-        let adj_h_m = `${l_hr_min}:${adjustedTime.getMinutes()} ${adj_a_p}`
-        let h_m = `${hour}:${date.getMinutes()} ${am_or_pm}`
+        //@ts-ignore
+        let adj_h_m = (am_or_pm == "PM") ? `${l_hr_min -12}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}` : `${l_hr_min}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}`
+        let h_m = (am_or_pm == "PM") ? `${hour -12}:${String(date.getMinutes()).padStart(2, "0")} ${am_or_pm}` : `${hour}:${String(date.getMinutes()).padStart(2, "0")} ${am_or_pm}`
         let x = await db.user.findFirst({'where': {
             'username': sessionData.hostUsername,
         }})
@@ -54,14 +62,16 @@ export default async function sessionInformation({ params }: { params: { id: str
             'studentID': accountLookupService['id'],
             'sessionID': parseInt(params.id)
         }})
+        let endTime = `${(sessionData.sessionDuration > 60) ? `${sessionData.sessionDuration/60} hours` : `${sessionData.sessionDuration} minutes`} long`
         let host = accountLookupService.username == sessionData.hostUsername
         return (
             <>
+                <DashboardNavbar />
                 <div className="sessionInformation">
                     <div className="si">
                         <h1>{sessionData.sessionName}</h1>
                         <h2>Hosted by {sessionData.hostFirstName}.</h2>
-                        <h3>{sessionData.sessionDuration} minutes long</h3>
+                        <h3>{endTime}</h3>
                         <h4>On {day}, {month} {date.getDate()}</h4>
                         <h5>From {h_m} till {adj_h_m}</h5>
                         <h6>{sessionData.ended ? "Ended" : "Not Ended"}</h6>

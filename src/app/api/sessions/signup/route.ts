@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         })
         // @ts-ignore
         if (decision.payload.aud == 'Loom' && accountLookupService != null && decision?.payload.exp * 1000 >= new Date().getTime()) {
-            let l = await db.sessionRegistrations.findFirst({'where': {'studentID': accountLookupService.id}})
+            let l = await db.sessionRegistrations.findFirst({'where': {'studentID': accountLookupService.id, 'sessionID': parseInt(id)}})
             if (l == null || l == undefined || accountLookupService.permission >= 3) {
                 let data = await db.session.findFirst({
                     'where': {

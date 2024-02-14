@@ -6,6 +6,7 @@ import 'dotenv/config'
 import { redirect } from 'next/navigation';
 import '@/css/sessions/sessions.css'
 import UseSession from '@/components/createSession';
+import DashboardNavbar from '@/components/dashboard_nav';
 export default async function space({ params }: { params: { id: string } }) {
     // Authenticate
     const cookieStore = cookies().get('authorization')?.value
@@ -74,7 +75,7 @@ export default async function space({ params }: { params: { id: string } }) {
         }
     }
     async function tutoringfilterer(session: any) {
-        if (parseInt(session.sessionTime) <= (new Date().getTime() / 1000) || session.ended != false) {
+        if (parseInt(session.sessionTime) >= (new Date().getTime() / 1000) || session.ended != false) {
             return true;
         } else {
             return false;
@@ -84,12 +85,12 @@ export default async function space({ params }: { params: { id: string } }) {
         'hostUsername': accountLookupService['username'],
         'spaceID': currentSpaceID
     }})
-
+    
     async function sessionsFilterer(s: any) {
         let better_l = []
         for (let i in s) {
             let session = s[i]
-            if (parseInt(session.sessionTime) >= (new Date().getTime() / 1000) || session.ended != false) {
+            if (parseInt(session.sessionTime) >= (new Date().getTime() / 1000) || session.ended == false) {
                 if (((new Date().getTime() / 1000) + (604800 * 10)) >= session.sessionTime) {
                     better_l.push(session)
                 } else {
@@ -109,12 +110,12 @@ export default async function space({ params }: { params: { id: string } }) {
         }
     })
     openSessions = (await sessionsFilterer(openSessions))
-    sessionsList = (await tutoringfilterer(sessionsList))
+    sessionsList = (await sessionsFilterer(sessionsList))
     return (
         <>
+        <DashboardNavbar />
         <div className='tutoringlearn'>
             <h1>{currentSpace.name}</h1>
-            <a href='/dashboard'>Return to Dashboard</a>
         </div>
         {isTutor ? (<>
                     <UseSession />
@@ -132,7 +133,7 @@ export default async function space({ params }: { params: { id: string } }) {
                             <div className='card-content'>
                                 <h1>{sessionsList[sessions].sessionName}</h1>
                                 <h3>On {new Date(sessionsList[sessions].sessionTime * 1000).toDateString()}</h3>
-                                <h4>From {`${new Date(sessionsList[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((openSessions[sessions].sessionTime + openSessions[sessions].sessionDuration * 60) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
+                                <h4>From {`${new Date(sessionsList[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((parseInt(sessionsList[sessions].sessionTime) + (sessionsList[sessions].sessionDuration * 60)) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
                                 <h4>Registered Students (Including yourself): {sessionsList[sessions].registeredUsers}/{sessionsList[sessions].maxUsers}</h4>
                             </div>
                         </a>                   
@@ -161,7 +162,7 @@ export default async function space({ params }: { params: { id: string } }) {
                                     <h1>{openSessions[sessions].sessionName}</h1>
                                     <h2>Hosted by {openSessions[sessions].hostFirstName}.</h2>
                                     <h3>On {new Date(openSessions[sessions].sessionTime * 1000).toDateString()}</h3>
-                                    <h4>From {`${new Date(openSessions[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((openSessions[sessions].sessionTime + openSessions[sessions].sessionDuration * 60) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
+                                    <h4>From {`${new Date(openSessions[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((parseInt(openSessions[sessions].sessionTime) + (openSessions[sessions].sessionDuration * 60)) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
                                     <h4>Registered Students: {openSessions[sessions].registeredUsers}/{openSessions[sessions].maxUsers}</h4>
                                 </div>
                             </a>                    

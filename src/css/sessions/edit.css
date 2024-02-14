@@ -1,21 +1,89 @@
 body {
     background-color: rgb(26, 26, 26);
 }
-.navbar {
+
+.edit {
     & {
-        background-color: rgb(20, 20, 20);
-        display: flex;
-        flex-direction: row;
+        text-align: center;
     }
-    .logo {
+    h1 {
+        font-size: 50px;
+        font-family: 'Poppins-SemiBold';
+    }
+    form {
         & {
-            display: flex;
-            flex-direction: row;
-            font-size: 30px;
-            font-family: 'Poppins-Logo';    
+            display: grid;
+            width: 500px;
+            margin: auto;        
         }
-        span {
-            transform: translateY(0.5px);
+
+        input {
+            background-color: rgb(42, 42, 42);
+            border-radius: 10px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .fik {
+            & {
+                display: grid;
+                gap: 15px;
+            }
         }
     }
+}
+
+.button {
+    padding: 10px;
+    background-color: rgb(46, 46, 46);
+    border-radius: 5px;
+    transition: 500ms;
+}
+.button:hover {
+    padding: 10px;
+    background-color: rgb(38, 38, 38);
+    border-radius: 5px;
+    transition: 500ms;
+}
+
+.button:focus {
+    padding: 10px;
+    background-color: rgb(22, 22, 22);
+    border-radius: 5px;
+    transition: 500ms;
+}
+
+select {
+    background-color: rgb(42, 42, 42);
+    border-radius: 5px;
+    padding: 20px;
+}
+#confirm {
+    & {
+        background-color: black;
+        border-radius: 10px;
+        color: white;
+        width: 400px;
+        height: 300px;
+    }
+    .st {
+        background-color: black;
+        color: white;
+        position: absolute;
+    }
+    .st #delete {
+        color: white;
+        background-color: grey;
+    }
+}
+#s {
+    background-color: rgb(183, 14, 14);
+    width: fit-content;
+    margin: auto;
+    border-radius: 10px;
+    padding: 10px;
+    transition: 500ms;
+}
+#s:hover {
+    background-color: red;
 }

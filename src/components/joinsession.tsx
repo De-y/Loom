@@ -3,6 +3,7 @@
 'use client'
 import '@/css/sessions/sessionpage.css'
 import db from '@/db/prisma';
+import { CircularProgress } from '@mui/material';
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react'
@@ -13,6 +14,7 @@ export default function JoinSession({id}: any) {
     const [endedecidor, setEndedDecisor] = useState(false);
     const [meetingJoin, setmeetingJoin] = useState(false);
     const [meetingURL, setmeetingURL] = useState(null)
+    const [loading, setLoading] = useState(true)
     function sumit() {
         fetch(url + '/api/sessions/signup', {
             'method': 'POST',
@@ -27,42 +29,6 @@ export default function JoinSession({id}: any) {
         })
     }
     useEffect(() => {
-        fetch(url + '/api/profile', {
-            'method': 'POST',
-            'body': JSON.stringify({
-                'token': getCookie('authorization')
-            })
-        }).then((ex) => {
-            ex.json().then((cl) => {
-                fetch(url + '/api/sessions/check_registration', {
-                    'method': 'POST',
-                    'body': JSON.stringify({
-                        'token': getCookie('authorization')
-                    })
-                }).then((mr) => {
-                    mr.json().then((ec) => {
-                        if (ec.info == null) {
-                            // @ts-ignore
-                            setEl('JSP')
-                        }
-                    })
-                })
-            })
-        })
-        fetch(url + '/api/sessions/check_session', {
-            'method': 'POST',
-            'body': JSON.stringify({
-                'id': id
-            })
-        }).then((res) => {
-            res.json().then((ens) => {
-                if (ens.meetingEnded != false && el != null) {
-                    setEndedDecisor(false)
-                } else {
-                    setEndedDecisor(false)
-                }
-            })
-        })
         fetch(url + '/api/meetings/get', {
             'method': 'POST',
             'body': JSON.stringify({
@@ -72,11 +38,29 @@ export default function JoinSession({id}: any) {
         }).then((req) => {
             req.json().then((res) => {
                 // @ts-ignore
-                console.log(res)
+                setLoading(false)
                 if (res.status == "Yes") {
                     setmeetingJoin(true);
                     // @ts-ignore
                     setmeetingURL("rvre")
+                    // @ts-ignore
+                    setEl('ok')
+                    // @ts-ignore
+                    setCl('ok')
+                } else if (res.status == "accountNotRegistered") {
+                    setEndedDecisor(false)
+                    setmeetingJoin(false)
+                    setEl(null)
+                    setCl(null)
+                } else if (res.status == "Meeting ended.") {
+                    setmeetingJoin(false)
+                    setEndedDecisor(true)
+                } else if (res.status == "WAIT") {
+                    setmeetingJoin(false)
+                    // @ts-ignore
+                    setEl('yes')
+                    // @ts-ignore
+                    setCl('ok')
                 }
             })
         })
@@ -93,17 +77,27 @@ export default function JoinSession({id}: any) {
             ) : (
                 <>
                             {
-                (el != null || el != undefined) ? (
+                (el == null || el == undefined) ? (
                     <>
                     {cl != null ? (
                             <p className='alr'>You are registered for this session!</p>
                         ) : (
                             <>
+                                {(loading == true) ? (
+                                    <>
+                                        <div className='l'>
+                                            <CircularProgress className='l' color={'inherit'} />
+                                        </div>
+                                    </>
+                                ) : (
+                                <>
                                         <form action={sumit}>
-                                            <button className='signup' type='submit'>
-                                                Signup
-                                            </button>
-                                        </form>
+                                        <button className='signup' type='submit'>
+                                            Signup
+                                        </button>
+                                    </form>
+                                </>
+                                )}
                             </>
                         )}
                     </>      

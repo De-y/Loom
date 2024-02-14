@@ -30,20 +30,28 @@ export async function POST(request: Request) {
                     'studentID': accountLookupService.id
                 }
             })     
-            console.log(parseInt(id))   
-            if (s_id != null) {
-                let m_id = await db.session.findFirst({
-                    'where': {
-                        'id': parseInt(id),
-                    }
-                })
-                let l = new Date().getTime()
-                if (((m_id.sessionTime - (60 * 10)) * 1000 <= l) == false) {
-                    return NextResponse.json({'status': 'Not yet'})
+            let m_id = await db.session.findFirst({
+                'where': {
+                    'id': parseInt(id),
                 }
-                return NextResponse.json({'status': 'Yes'})
+            })
+            
+            if (s_id != null || m_id.hostUsername == accountLookupService.username) {
+                let l = new Date().getTime()
+                if (((m_id.sessionTime - (60 * 10)) * 1000 <= l) == false && m_id.ended == false) {
+                    if (accountLookupService.permission >= 3) {
+                        return NextResponse.json({'status': 'WAIT'})
+                    }
+                    return NextResponse.json({'status': 'Not yet'})
+                } else if (m_id.ended == false) {
+                    return NextResponse.json({'status': 'Yes'})
+                } else {
+                    return NextResponse.json({'status': 'Meeting ended.'})
+                }
+            } else if (m_id.ended == true) {
+                return NextResponse.json({'status': 'Meeting ended.'})
             }
-            return NextResponse.json({'e': 'e'})
+            return NextResponse.json({'status': 'accountNotRegistered'})
         } else {
             return NextResponse.json({'status': 'Account does not exist.'}, {
                 'status': 403,
