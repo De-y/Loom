@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 
 export async function POST(request: Request) {
     let data = (await request.json())
-    let id = data['id'].id
+    let id = data['id']
     let session_finder = await db.session.findFirst({
         'where': {
             'id': id,

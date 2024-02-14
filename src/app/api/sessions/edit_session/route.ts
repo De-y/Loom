@@ -10,7 +10,7 @@ export async function POST(request: Request) {
         const data = await request.json()
         const coreInformation = data['sessionInformation']
         const handoffInformation = data['handoff']
-        const ID = handoffInformation.path.id
+        const ID = handoffInformation.path
         let availableSpaces = await fetch(`${headers().get('origin')}/api/spaces`)
         availableSpaces = await availableSpaces.json()
         // @ts-ignore
@@ -36,6 +36,7 @@ export async function POST(request: Request) {
             }
         })
         // @ts-ignore
+
         if (decision.payload.aud == 'Loom' && accountLookupService != null && decision?.payload.exp * 1000 >= new Date().getTime() && accountLookupService?.permission >= 1) {
             const profileLookupService = await db.profile.findFirst({
                 where: {
@@ -50,7 +51,7 @@ export async function POST(request: Request) {
                 }
             }
             if (matchFound || accountLookupService.permission >= 2) {
-                if (coreInformation.destinedTime <= (new Date().getTime() / 1000)) {
+                if ((coreInformation.destinedTime * 1000) <= (new Date().getTime())) {
                     return NextResponse.json({'status': 'Invalid Time. The time needs to be hours ahead of the current time.'}, {
                         'status': 400,
                     })    

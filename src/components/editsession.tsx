@@ -1,5 +1,6 @@
 'use client'
 
+import { CircularProgress } from "@mui/material";
 import { getCookie } from "cookies-next"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react";
@@ -17,7 +18,10 @@ export default function EditSession({ id }: { id: any }) {
             response.json().then((res) => {
                 const hours = new Date(res.sessionTime * 1000).getHours();
                 const minutes = new Date(res.sessionTime * 1000).getMinutes();
-                const sessionDate = new Date(res.sessionTime * 1000).toLocaleDateString().split('T')[0];
+                let month = new Date(res.sessionTime * 1000).getMonth() + 1;
+                let day = new Date(res.sessionTime * 1000).getDate();
+                let year = new Date(res.sessionTime * 1000).getFullYear();
+                const sessionDate = `${year}-${(month < 10) ? `0${month}` : `${month}`}-${day}`;
                 const sessionTime = `${hours}:${minutes}`;
                 const updatedInformation = {
                     maxUsers: res.maxUsers,
@@ -26,7 +30,7 @@ export default function EditSession({ id }: { id: any }) {
                     sessionDate: sessionDate,
                     sessionTime: sessionTime
                 };
-                setInformation(updatedInformation);
+               setInformation(updatedInformation);
                 setLoading(false);
             });
         });
@@ -63,7 +67,7 @@ export default function EditSession({ id }: { id: any }) {
                 sessionInformation: {
                     name: sessionName,
                     // @ts-ignore
-                    destinedTime: new Date(`${session_date} ${sessionTime}`).getTime() / 1000,
+                    destinedTime: new Date(`${sessionDate} ${sessionTime}`).getTime() / 1000,
                     duration: sessionDuration,
                     max_users: maxUsers
                 },
@@ -76,7 +80,7 @@ export default function EditSession({ id }: { id: any }) {
             response.json().then((responseInformation) => {
                 if (responseInformation.status === 'OK') {
                     console.log("Attempting to refresh");
-                    router.push(`/sessions/${id.id}`);
+                    router.push(`${responseInformation.sessionPage}`);
                 } else {
                     const error = document.getElementById('error');
                     // @ts-ignore
@@ -139,7 +143,8 @@ export default function EditSession({ id }: { id: any }) {
                     </>
                 ) : (
                         <>
-                            <h1>Loading...</h1>
+                            <CircularProgress color={'inherit'} />
+                            <br />
                         </>
                     )}
             <br />

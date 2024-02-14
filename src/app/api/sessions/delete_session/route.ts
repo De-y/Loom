@@ -8,7 +8,7 @@ import 'dotenv/config'
 export async function DELETE(request: Request) {
     try {
         let data = (await request.json())
-        let deletion_id = data['delete_id']['id']
+        let deletion_id = data['delete_id']
         let token = data['token']
         // @ts-ignore
         let decision = await jwtVerify(token, createSecretKey(process.env.JWT_Secret, 'utf-8'))
@@ -45,7 +45,8 @@ export async function DELETE(request: Request) {
             }
         }
         return NextResponse.json({'status': 'ok'})
-    } catch {
+    } catch (err) {
+        console.log(err)
         return NextResponse.json({
             'status': 'no authorization'
         })
