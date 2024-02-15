@@ -1,0 +1,52 @@
+body {
+    background-color: rgb(29, 29, 29);
+}
+
+.spaces {
+    & {
+        width: 80%;
+        border-radius: 10px;
+        text-align: center;
+        position: absolute;
+        left: 10%;
+        top: 30%;
+    }
+    .df {
+        position: absolute;
+        width: 90%;
+        border-radius: 10px;
+        background-color: #272727;
+        left: 50%;
+        top: 50%;
+        min-height: 200px;
+        transform: translate(-50%,-50%);
+    }
+    .df .sp {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 25px;
+        font-family: 'Poppins-SemiBold';
+    }
+}
+
+.spaces-cards {
+    & {
+        position: absolute;
+        display: grid;
+        background-color: black;
+        width: 100%;
+        top: 50%;
+        column-count: auto;
+        grid-template-columns: repeat(auto-fit, 1fr);
+        row-gap: 10px;
+        column-gap: 10px;
+    }
+    .space {
+        min-width: 300px;
+        background-color: gray;
+        text-align: center;
+        margin: auto;
+    }
+}

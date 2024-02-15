@@ -35,13 +35,9 @@ body {
 .sessionInformation {
     & {
         background-color: rgb(36, 36, 36);
-        min-width: 400px;
-        max-width: 600px;
+        width: 100%;
         position: absolute;
-        left: 50px;
-        top: 100px;
-        min-height: 500px;
-        max-height: 700px;
+        min-height: 650px;
         text-align: center;
         margin: auto;
         align-items: center;
