@@ -4,22 +4,16 @@ body {
 
 .spaces {
     & {
-        width: 80%;
+        width: 100%;
         border-radius: 10px;
         text-align: center;
         position: absolute;
-        left: 10%;
-        top: 30%;
     }
     .df {
-        position: absolute;
-        width: 90%;
+        width: 100%;
         border-radius: 10px;
         background-color: #272727;
-        left: 50%;
-        top: 50%;
         min-height: 200px;
-        transform: translate(-50%,-50%);
     }
     .df .sp {
         position: absolute;
@@ -35,18 +29,27 @@ body {
     & {
         position: absolute;
         display: grid;
-        background-color: black;
         width: 100%;
-        top: 50%;
-        column-count: auto;
-        grid-template-columns: repeat(auto-fit, 1fr);
+        top: 70%;
+        transform: translateY(-40%);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-auto-rows: minmax(100px, auto);
         row-gap: 10px;
         column-gap: 10px;
     }
+
     .space {
-        min-width: 300px;
-        background-color: gray;
-        text-align: center;
-        margin: auto;
+        & {
+            min-width: 300px;
+            border-radius: 10px;
+            min-height: 200px;
+            background-color: rgb(40, 40, 40);
+            text-align: center;
+            margin: auto;    
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Poppins-SemiBold';
+            transition: 500ms;
+        }
     }
 }

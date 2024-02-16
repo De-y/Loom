@@ -44,7 +44,7 @@ export async function POST(request: Request) {
                     }
                     return NextResponse.json({'status': 'Not yet'})
                 } else if (m_id.ended == false) {
-                    return NextResponse.json({'status': 'Yes'})
+                    return NextResponse.json({'status': 'Yes', 'inv_link': m_id.meetingInvite})
                 } else {
                     return NextResponse.json({'status': 'Meeting ended.'})
                 }

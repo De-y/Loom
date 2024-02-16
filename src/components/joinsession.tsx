@@ -42,7 +42,7 @@ export default function JoinSession({id}: any) {
                 if (res.status == "Yes") {
                     setmeetingJoin(true);
                     // @ts-ignore
-                    setmeetingURL("rvre")
+                    setmeetingURL(res.inv_link)
                     // @ts-ignore
                     setEl('ok')
                     // @ts-ignore

@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(19, 19, 19);
+}
+
+.tutor {
+    & {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+    }
+    .tutor-hub {
+        & {
+            text-align: center;
+        }
+        h1 {
+            font-size: 30px;
+            font-family: 'Poppins-SemiBold';
+        }
+    }
+}
+
+.cg {
+    & {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        row-gap: 10px;
+        column-gap: 10px;
+        width: 90%;
+        margin: auto;
+        grid-auto-rows: minmax(100px, auto);    
+    }
+    .crd {
+        & {
+            margin: auto;
+            background-color: #181818;
+            min-width: 100%;
+            text-align: center;
+            min-height: 200px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+    }
+}
+
+form {
+    input {
+        background-color: #2b2b2b;
+        text-align: center;
+        border-radius: 5px;
+    }
+}

@@ -68,6 +68,7 @@ export async function POST(request: Request) {
                         'hostUsername': decision?.payload.id,
                         'hostFirstName': `${accountLookupService.name.split(' ')[0]} ${accountLookupService.name.split(' ')[accountLookupService.name.split(' ').length - 1][0]}`,
                         'maxUsers': parseInt(coreInformation.max_users),
+                        'meetingInvite': coreInformation['invite-link'],
                     }})
                     // @ts-ignore
                     // USE ${l.id} BELOW
