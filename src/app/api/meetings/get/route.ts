@@ -72,11 +72,16 @@ export async function POST(request: Request) {
                     let x = await db.meetingRegistrar.create({data: {
                         'meetingPrefix': room_prefix.toString(),
                         'sessionID': parseInt(id),
+                        // @ts-ignore
                         'meetingURL': post_information['roomUrl'],
+                        // @ts-ignore
                         'meetingName': post_information['roomName'],
+                        // @ts-ignore
                         'meetingID': post_information['meetingId'],
+                        // @ts-ignore
                         'endDate': post_information['endDate']
                     }})
+                    // @ts-ignore
                     return NextResponse.json({'status': 'Yes', 'inv_link': post_information['meetingURL']})
                 } else {
                     return NextResponse.json({'status': 'Meeting ended.'})
