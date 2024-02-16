@@ -43,14 +43,20 @@ export async function POST(request: Request) {
                     'relatedUsername': accountLookupService.username
                 }
             })
-            let matchFound;
-            for (let identity in profileLookupService.certifications) {
-                if (profileLookupService.certifications[identity] == credentialsIdentity) {
-                    matchFound = true;
-                    break
+            const sessionService = await db.session.findFirst({
+                where: {
+                    'hostUsername': accountLookupService.username,
+                    'id': ID,
                 }
+            })
+            let matchFound;
+
+            
+            if (sessionService != undefined || sessionService != null) {
+                matchFound = true
             }
-            if (matchFound || accountLookupService.permission >= 2) {
+
+            if (matchFound || accountLookupService.permission >= 3) {
                 if ((coreInformation.destinedTime * 1000) <= (new Date().getTime())) {
                     return NextResponse.json({'status': 'Invalid Time. The time needs to be hours ahead of the current time.'}, {
                         'status': 400,
@@ -69,8 +75,6 @@ export async function POST(request: Request) {
                             'sessionTime': coreInformation.destinedTime.toString(),
                             'sessionDuration': parseInt(coreInformation.duration),
                             // @ts-ignore
-                            'hostUsername': decision?.payload.id,
-                            'hostFirstName': `${accountLookupService.name.split(' ')[0]} ${accountLookupService.name.split(' ')[accountLookupService.name.split(' ').length - 1][0]}`,
                             'maxUsers': parseInt(coreInformation.max_users),   
                         }
                     })

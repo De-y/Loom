@@ -43,7 +43,8 @@ export default async function editSessionInformation({ params }: { params: { id:
     if (c == undefined || c == null) {
         redirect('/spaces')
     } else {
-        if (c.hostUsername != accountLookupService.username) {
+        if (accountLookupService.permission >= 3) {
+        } else if (c.hostUsername != accountLookupService.username) {
             redirect('/spaces')
         } else if (c.ended == true) {
             redirect('/spaces')

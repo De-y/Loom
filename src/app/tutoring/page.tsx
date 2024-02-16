@@ -28,6 +28,11 @@ export default async function tutoringCentral() {
     if (isVerified == false) {
         redirect('/application')
     }
+    let pr = await db.profile.findFirst({
+        where: {
+            'relatedUsername': accountLookupService.username,
+        }
+    })
     return (
         <>
             <DashboardNavbar />
@@ -51,12 +56,15 @@ export default async function tutoringCentral() {
                             <div className='cg'>
                                 <div className='crd'>
                                     <div className='crd-cntnt'>
-                                        <LogHours />
+                                        <h1>Your Hours:</h1>
+                                        <h2>{pr.hoursEarned} hours</h2>
+                                        <h3>{pr.minutesEarned} minutes</h3>
                                     </div>
                                 </div>
                                 <div className='crd'>
                                     <div className='crd-cntnt'>
-                                        <h1></h1>
+                                        <h1>Get your hours signed and even get more certifications</h1>
+                                        <p>Contact tutoring@avnce.org to go to the next steps.</p>
                                     </div>
                                 </div>
                             </div>

@@ -29,8 +29,10 @@ export default function SpacesInformation() {
             ) : (
                 <>
                     {spaces && Object.keys(spaces).map((sp) => (
+                        // @ts-ignore
                         <a key={sp} href={spaces[sp].url} className='space'>
                             <div className='la'>
+                                {/* @ts-ignore */}
                                 {spaces[sp].name}
                             </div>
                         </a>

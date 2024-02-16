@@ -44,7 +44,16 @@ model session {
   spaceID         Int
   ended           Boolean @default(false)
   registeredUsers Int     @default(1)
-  meetingInvite String
+}
+
+model meetingRegistrar{ 
+  id String @id @default(cuid())
+  meetingID String
+  meetingPrefix String
+  meetingName String
+  meetingURL String
+  sessionID Int
+  endDate DateTime
 }
 
 model sessionRegistrations {

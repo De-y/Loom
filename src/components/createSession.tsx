@@ -31,7 +31,6 @@ export default function UseSession() {
                     'duration': session_duration,
                     'max_users': max_users,
                     // @ts-ignore
-                    'invite-link': session_invite?.value,
                 },
                 'handoff': {
                     'token': getCookie('authorization'),
@@ -64,8 +63,6 @@ export default function UseSession() {
                             <h1 className='confirm'>Create a session</h1>
                             <label htmlFor="session_n">Session Name: </label>
                             <input type='text' placeholder='Session Name' id="session_n" required/>
-                            <label htmlFor="session_n">Session Invite Link: </label>
-                            <input type='text' placeholder='Session Invite Link' id="session_i" required/>
                             <label htmlFor="session_t">Session Time Starts (Local Time):</label>
                             <input type='time' placeholder='Session Time' id="session_t" required/>
                             <label htmlFor="session_date">Session Date:</label>
