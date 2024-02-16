@@ -50,6 +50,67 @@ export async function POST(request: Request) {
                         }
                     })
                     if (mR != null) {
+                        let c = await Axios.get(`https://api.whereby.dev/v1/meetings/${mR.meetingID}`, {
+                            'headers': {
+                                'Authorization': `Bearer ${process.env.WHEREBY_API}`,
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                        let s = await Axios.get("https://api.whereby.dev/v1/insights/room-sessions", {
+                            'headers': {
+                                'Authorization': `Bearer ${process.env.WHEREBY_API}`,
+                                'Content-Type': 'application/json',
+                                'roomName': mR.meetingName,
+                                'roomSessionId': mR.meetingID
+                            }
+                        })
+                        s = s.data.results
+                        for (let i in s) {
+                            // @ts-ignore
+                            if (s[i].roomName == mR.meetingName) {
+                                // @ts-ignore
+                                s = s[i]
+                                await Axios.delete(`https://api.whereby.dev/v1/meetings/${mR.meetingID}`, {
+                                    'headers': {
+                                        'Authorization': `Bearer ${process.env.WHEREBY_API}`,
+                                        'Content-Type': 'application/json',
+                                        'roomName': mR.meetingName
+                                    }
+                                })
+                                // @ts-ignore
+                                let tutorMinutes = new Date(s.totalParticipantMinutes * 60 * 1000).getMinutes()
+                                // @ts-ignore
+                                let tutorProfile = await db.profile.findFirst({
+                                    'where': {
+                                        'relatedUsername': m_id.hostUsername
+                                    }
+                                })
+                                await db.profile.update({
+                                    'where': {
+                                        'id': tutorProfile.id,
+                                    },
+                                    'data': {
+                                        // @ts-ignore
+                                        'minutesEarned': tutorProfile.minutesEarned + parseInt(tutorMinutes),
+                                        // @ts-ignore
+                                        'sessionsHosted': tutorProfile.sessionsHosted + 1,
+                                    }
+                                })
+                                await db.session.update({
+                                    'where': {
+                                        'id': parseInt(id)
+                                    },
+                                    'data': {
+                                        'ended': true
+                                    }
+                                })
+                                return NextResponse.json({'status': 'Meeting ended.'})    
+                            }
+                            else {
+                                continue
+                            }
+                        }
+                        // @ts-ignore
                         return NextResponse.json({
                             'status': 'Yes',
                             'inv_link': mR.meetingURL
@@ -66,10 +127,9 @@ export async function POST(request: Request) {
                         }
                     })
                     post_information = post_information.data
-                    console.log(post_information)
                     // @ts-ignore
 
-                    let x = await db.meetingRegistrar.create({data: {
+                    await db.meetingRegistrar.create({data: {
                         'meetingPrefix': room_prefix.toString(),
                         'sessionID': parseInt(id),
                         // @ts-ignore

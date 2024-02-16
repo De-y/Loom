@@ -56,9 +56,8 @@ export default async function tutoringCentral() {
                             <div className='cg'>
                                 <div className='crd'>
                                     <div className='crd-cntnt'>
-                                        <h1>Your Hours:</h1>
-                                        <h2>{pr.hoursEarned} hours</h2>
-                                        <h3>{pr.minutesEarned} minutes</h3>
+                                        <h1>Your Impact:</h1>
+                                        <h2>{pr.minutesEarned} minutes</h2>
                                     </div>
                                 </div>
                                 <div className='crd'>
