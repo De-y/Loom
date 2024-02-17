@@ -53,9 +53,8 @@ export default async function sessionInformation({ params }: { params: { id: str
         let adj_a_p = (adjustedTime.getHours() < 12) ? "AM" : "PM";
         let l_hr_min = adjustedTime.getHours()
         //@ts-ignore
-        let adj_h_m = (am_or_pm == "PM") ? `${l_hr_min -12}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}` : `${l_hr_min}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}`
-        let h_m = (am_or_pm == "PM") ? `${hour -12}:${String(date.getMinutes()).padStart(2, "0")} ${am_or_pm}` : `${hour}:${String(date.getMinutes()).padStart(2, "0")} ${am_or_pm}`
-        let x = await db.user.findFirst({'where': {
+        let adj_h_m = (am_or_pm == "PM") ? `${(l_hr_min - 12 - 8) % 24}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}` : `${(l_hr_min + 24 - 8) % 24}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}`;
+        let h_m = (am_or_pm == "PM") ? `${(hour - 12 - 8) % 24}:${String(date.getMinutes()).padStart(2, "0")} ${am_or_pm}` : `${(hour + 24 - 8) % 24}:${String(date.getMinutes()).padStart(2, "0")} ${am_or_pm}`;        let x = await db.user.findFirst({'where': {
             'username': sessionData.hostUsername,
         }})
         let sessionRegistered = await db.sessionRegistrations.findFirst({'where': {

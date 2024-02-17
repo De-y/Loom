@@ -37,7 +37,8 @@ export async function POST(request: Request) {
             })
             if (s_id != null || m_id.hostUsername == accountLookupService.username) {
                 let l = new Date().getTime()
-                if (((m_id.sessionTime - (60 * 10)) * 1000 <= l) == false && m_id.ended == false) {
+                if (((parseInt(m_id.sessionTime) - (60 * 10)) * 1000 <= l) != true && m_id.ended == false) {
+                    console.log("WHY")
                     if (accountLookupService.permission >= 3) {
                         return NextResponse.json({'status': 'WAIT'})
                     }
