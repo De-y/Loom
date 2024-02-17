@@ -50,7 +50,7 @@ export default async function sessionInformation({ params }: { params: { id: str
         let hour = date.getHours()
         let am_or_pm = (hour < 12) ? "AM" : "PM";
         var adjustedTime = new Date(((sessionData.sessionTime / 60) + sessionData.sessionDuration) * 60 * 1000)
-        let adj_a_p = (adjustedTime.getHours() < 12) ? "AM" : "PM";
+        let adj_a_p = (hour < 12) ? "AM" : "PM";
         let l_hr_min = adjustedTime.getHours()
         //@ts-ignore
         let adj_h_m = (am_or_pm == "PM") ? `${(l_hr_min - 12) % 24}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}` : `${(l_hr_min) % 24}:${String(adjustedTime.getMinutes()).padStart(2, "0")} ${adj_a_p}`;
