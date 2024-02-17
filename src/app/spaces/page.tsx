@@ -8,7 +8,7 @@ export default function space() {
             <div className="spaces">
                 <div className="df">
                     <div className="sp">
-                        <h1>Find spaces for you to learn and grow.</h1>
+                        <h1>Find classes for you to learn and grow.</h1>
                     </div>
                 </div>
             </div>

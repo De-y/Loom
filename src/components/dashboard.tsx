@@ -77,7 +77,7 @@ const Dash = () => {
                         </div>
                         <div className='classes-to-learn'>
                             {/* @ts-ignore */}
-                            <h1>Spaces.</h1>
+                            <h1>My Classes.</h1>
                             <div className='class-courses'>
                                 {
                                     spacesInformation ? (
@@ -95,7 +95,7 @@ const Dash = () => {
                                     ) : (<>
                                             <a href='/spaces' className='card'>
                                                 <div className='card-content'>
-                                                    <h1>Spaces could not get found.</h1>
+                                                    <h1>Classes could not get found.</h1>
                                                 </div>
                                             </a>
                                         </>)

@@ -22,6 +22,11 @@ export async function GET(request: Request) {
                 'name': 'English',
                 'url': '/spaces/english',
                 'uid': 4
+            },
+            {
+                'name': '日本語',
+                'url': '/spaces/japanese',
+                'uid': 5
             }
         ]
     })
