@@ -131,6 +131,15 @@ export async function GET(request: Request) {
                         'availableSpaces': t_spaces_lookup
                     })
                 } else {
+                    let x = []
+                    for (let i in spaces_lookup) {
+                        let d = await db.spaceTeaching.findFirst({
+                            'where': {
+                                'id': spaces_lookup[i].spaceID
+                            }
+                        })
+                        x.push(d)
+                    }
                     let c = [
                         {
                             'name': 'Algebra 1',
@@ -159,10 +168,10 @@ export async function GET(request: Request) {
                         }
                     ]
                     for (let i in c) {
-                        spaces_lookup.push(c[i])
+                        x.push(c[i])
                     }
                     return NextResponse.json({
-                        'availableSpaces': spaces_lookup
+                        'availableSpaces': x
                     })
                 }
             }

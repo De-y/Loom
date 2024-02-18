@@ -120,12 +120,19 @@ export default async function space({ params }: { params: { id: string } }) {
             'id': currentSpace.uid
         }
     })
+    if (j_code != null) {
+        j_code = j_code.joinCode
+    } else {
+        j_code = ''
+    }
     return (
         <>
         <DashboardNavbar />
         <div className='tutoringlearn'>
             <h1>{currentSpace.name}</h1>
-            <h2>Join Code: {j_code.joinCode}</h2>
+            {(accountLookupService.permission >= 2) ? (
+                            <h2>Join Code: {j_code}</h2>
+            ) : null}
         </div>
         {isTutor ? (<>
                     <UseSession />

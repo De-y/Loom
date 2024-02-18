@@ -41,7 +41,6 @@ export default async function sessionInformation({ params }: { params: { id: str
 
         // @ts-ignore
         e = e.availableSpaces
-        console.log(e)
         let currentSpaceID, currentSpace;
         for (let i in e) {
             // @ts-ignore
