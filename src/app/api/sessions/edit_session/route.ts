@@ -38,11 +38,6 @@ export async function POST(request: Request) {
         // @ts-ignore
 
         if (decision.payload.aud == 'Loom' && accountLookupService != null && decision?.payload.exp * 1000 >= new Date().getTime() && accountLookupService?.permission >= 1) {
-            const profileLookupService = await db.profile.findFirst({
-                where: {
-                    'relatedUsername': accountLookupService.username
-                }
-            })
             const sessionService = await db.session.findFirst({
                 where: {
                     'hostUsername': accountLookupService.username,

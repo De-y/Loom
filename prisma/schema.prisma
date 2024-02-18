@@ -61,3 +61,18 @@ model sessionRegistrations {
   sessionID Int
   studentID String
 }
+
+model spaceTeaching  {
+  id Int @id @default(sequence())
+  TeacherID String
+  name String
+  url String
+  uid Int
+  joinCode String
+}
+
+model spaceRegistrar {
+  id String @id @default(cuid())
+  StudentID String
+  spaceID Int
+}

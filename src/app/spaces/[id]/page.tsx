@@ -29,7 +29,11 @@ export default async function space({ params }: { params: { id: string } }) {
     if (isVerified == false) {
         redirect('/application')
     }
-    let e =await fetch(`http://${headers().get('Host')}/api/spaces`);
+    let e =await fetch(`http://${headers().get('Host')}/api/spaces`, {
+        'headers': {
+            'authorization': cookieStore
+        }
+    });
     e = await e.json()
     // @ts-ignore
     e = e.availableSpaces

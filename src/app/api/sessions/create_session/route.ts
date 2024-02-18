@@ -11,7 +11,11 @@ export async function POST(request: Request) {
         const coreInformation = data['sessionInformation']
         const handoffInformation = data['handoff']
         const ID = handoffInformation.path
-        let availableSpaces = await fetch(`${headers().get('origin')}/api/spaces`)
+        let availableSpaces = await fetch(`${headers().get('origin')}/api/spaces`, {
+            'headers': {
+                'authorization': handoffInformation.token
+            }
+        })
         availableSpaces = await availableSpaces.json()
         // @ts-ignore
         availableSpaces = availableSpaces.availableSpaces

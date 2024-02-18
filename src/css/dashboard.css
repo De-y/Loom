@@ -17,6 +17,133 @@ body {
     }
 }
 
+#join_course {
+    & {
+        background-color: rgb(22, 22, 22);
+        color: white;
+        border-radius: 10px;
+    }
+    #j_course_body {
+        & {
+            background-color: rgb(22, 22, 22);
+            min-width: 350px;
+            color: white;
+            text-align: center;
+            height: 500px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-family: 'Poppins-SemiBold';
+            font-size: 25px;
+        }
+        #middle {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        form {
+            & {
+                display: grid;
+                gap: 10px;
+                width: 90%;
+                margin: auto;
+            }
+            input {
+                background-color: rgb(37, 37, 37);
+                border-radius: 5px;  
+                padding: 10px;
+                transition: 500ms;              
+            }
+            button {
+                background-color: rgb(37, 37, 37);
+                border-radius: 5px;  
+                padding: 10px;
+                transition: 500ms;              
+            }
+            input:focus {
+                background-color: rgb(30, 30, 30);
+            }
+        }
+    }
+}
+
+#create_course {
+    & {
+        background-color: rgb(22, 22, 22);
+        color: white;
+        border-radius: 10px;
+    }
+    #x_course_body {
+        & {
+            background-color: rgb(22, 22, 22);
+            min-width: 375px;
+            color: white;
+            text-align: center;
+            height: 500px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-family: 'Poppins-SemiBold';
+            font-size: 25px;
+        }
+        #middle {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        form {
+            & {
+                display: grid;
+                gap: 10px;
+                width: 90%;
+                margin: auto;
+            }
+            input {
+                background-color: rgb(37, 37, 37);
+                border-radius: 5px;  
+                padding: 10px;
+                transition: 500ms;              
+            }
+            button {
+                background-color: rgb(37, 37, 37);
+                border-radius: 5px;  
+                padding: 10px;
+                transition: 500ms;              
+            }
+            input:focus {
+                background-color: rgb(30, 30, 30);
+            }
+        }
+    }
+}
+
+
+.join-course {
+    & {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        gap: 10px;
+        width: fit-content;
+    }
+    a {
+        background-color: rgb(35, 35, 35);
+        border-radius: 10px;
+        padding: 10px;
+        float: right;
+        transition: 500ms;
+    }
+    .c_course {
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+    a:hover {
+        background-color: rgb(93, 88, 88);
+    }
+}
 .classes-to-learn {
     & {
         text-align: center;

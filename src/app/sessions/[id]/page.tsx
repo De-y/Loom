@@ -30,17 +30,30 @@ export default async function sessionInformation({ params }: { params: { id: str
             redirect('/application')
         }
         let sessionData = await db.session.findFirst({where: {
-            'id': parseInt(params.id)
+            'id': parseInt(params.id),
         }});
-        if ((((sessionData.sessionTime + (sessionData.sessionDuration/60)) * 1000) <= new Date().getTime()) == true) {
-            await db.session.update({
-                'where': {
-                    'id': parseInt(params.id)
-                },
-                'data': {
-                    'ended': true,
-                }
-            })
+        let e =await fetch(`http://${headers().get('Host')}/api/spaces`, {
+            'headers': {
+                'authorization': cookieStore
+            }
+        });
+        e = await e.json()
+
+        // @ts-ignore
+        e = e.availableSpaces
+        console.log(e)
+        let currentSpaceID, currentSpace;
+        for (let i in e) {
+            // @ts-ignore
+            if (e[i].uid == sessionData.spaceID) {
+                // @ts-ignore
+                currentSpaceID = e[i].id;
+                // @ts-ignore
+                currentSpace = e[i]
+            }
+        }
+        if (currentSpace == null) {
+            redirect('/dashboard')
         }
         let date = new Date(sessionData.sessionTime * 1000)
         var monthsOfYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

@@ -6,11 +6,15 @@ import '@/css/dashboard.css';
 import { CircularProgress } from '@mui/material';
 import DashboardNavbar from './dashboard_nav';
 import Router from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 
 const Dash = () => {
     const [profileInformation, setProfileInformation] = useState(null);
     const [spacesInformation, setSpacesInformation] = useState(null);
     const [loading, setLoading] = useState(true);
+    let router = useRouter()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,8 +59,88 @@ const Dash = () => {
 
         fetchData();
     }, []);
+
+    function joinCourse() {
+        let c = document.getElementById("join_course")
+        // @ts-ignore
+        c?.addEventListener('click', () => c?.close());
+        document.getElementById('j_course_body')?.addEventListener('click', (event) => event.stopPropagation())
+        // @ts-ignore
+        c.showModal()
+    }
+    function createCourse() {
+        let c = document.getElementById("create_course")
+        // @ts-ignore
+        c?.addEventListener('click', () => c?.close());
+        document.getElementById('x_course_body')?.addEventListener('click', (event) => event.stopPropagation())
+        // @ts-ignore
+        c.showModal()
+    }
+    function joinClass() {
+        // @ts-ignore
+        const j_code = document.getElementById('join_code').value
+        fetch('/api/spaces/join', {
+            'method': 'POST',
+            'body': JSON.stringify({
+                'join_code': j_code
+            })
+        }).then((r) => {
+            r.json().then((res) => {
+                if (res.status == 'OK') {
+                    router.push("/dashboard")
+                } else {
+                    // @ts-ignore
+                    document.getElementById('err').style.display = 'inline';
+                }
+            })
+        })
+    }
+    function createClass() {
+        // @ts-ignore
+        const class_name = document.getElementById('class_name').value
+        fetch('/api/spaces/create', {
+            'method': 'POST',
+            'body': JSON.stringify({
+                'class_name': class_name,
+            })
+        }).then((r) => {
+            r.json().then((res) => {
+                if (res.status == 'OK') {
+                    router.push("/dashboard")
+                } else {
+                    // @ts-ignore
+                    document.getElementById('err').style.display = 'inline';
+                }
+            })
+        })
+    }
+
     return (
         <div>
+            <dialog id="join_course">
+                <div id='j_course_body'>
+                    <div id="middle">
+                        <h3 id='err'></h3>
+                        <h1>Join a course</h1>
+                        <form action={joinClass}>
+                            <input placeholder='Join Code' id='join_code'/>
+                            <button type='submit'>Join</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            <dialog id="create_course">
+                <div id='x_course_body'>
+                    <div id="middle">
+                        <h3 id='err'></h3>
+                        <h1>Create a class</h1>
+                        <form action={createClass}>
+                            <input placeholder='Class Name' id='class_name'/>
+                            <button type='submit'>Create</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
             {loading ? (
                 <div className="loading-screen">
                     <h2>Loom.</h2>
@@ -77,6 +161,16 @@ const Dash = () => {
                         </div>
                         <div className='classes-to-learn'>
                             {/* @ts-ignore */}
+                            <div className='join-course'>
+                                    <a className='j_course' onClick={joinCourse}><FontAwesomeIcon icon={faPlus} /> <span>Join a class</span></a>
+                                    {/* @ts-ignore */}
+                                    {(profileInformation.teacher == true) ? (
+                                    // @ts-ignore
+                                   <a className='c_course' onClick={createCourse}><FontAwesomeIcon icon={faPlus} /> <span>Create a class</span></a>
+                                    ) : null}
+                            </div>
+                            <br />
+                            <br />
                             <h1>My Classes.</h1>
                             <div className='class-courses'>
                                 {

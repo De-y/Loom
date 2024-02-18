@@ -56,6 +56,7 @@ export async function POST(request: Request) {
                     'full_name': accountLookupService.name,
                     'age': accountLookupService.age,
                     'is_tutor': accountLookupService.tutor,
+                    'teacher': (accountLookupService.permission >= 2),
                     'learner_statistics': {
                         'hoursLearnt': profileLookupService.hoursLearnt,
                         'minutesLearnt': profileLookupService.minutesLearnt,

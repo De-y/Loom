@@ -22,7 +22,7 @@ export default function DashboardNavCli() {
                         <div className='options'>
                             <a href='/dashboard'>Dashboard</a>
                             <a href='/tutoring'>Tutoring Central</a>
-                            <a href="/spaces">Spaces</a>
+                            <a href="/spaces">Classes</a>
                             <a href='/logout'>Logout</a>
                         </div>
                     </div>
