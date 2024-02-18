@@ -41,7 +41,7 @@ export async function POST(request: Request) {
                     if (accountLookupService.permission >= 3) {
                         return NextResponse.json({'status': 'WAIT'})
                     }
-                    return NextResponse.json({'status': 'Not yet'})
+                    return NextResponse.json({'status': 'WAIT'})
                 } else if (m_id.ended == false) {
                     let room_prefix = m_id.sessionName.toLowerCase().split(' ').join('')
                     let mR = await db.meetingRegistrar.findFirst({

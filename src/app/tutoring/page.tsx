@@ -40,9 +40,11 @@ export default async function tutoringCentral() {
                 (isTutor == false) ? (
                     <>
                         <div className='tutor'>
-                            <h1>Apply to become a tutor</h1>
-                            <p>Become a tutor and get volunteering hours!</p>
-                            <p>Email <a href='mailto://tutoring@avnce.org'>tutoring@avnce.org</a> to apply.</p>
+                            <div className='tutor-hub'>
+                                <h1>Apply to become a tutor</h1>
+                                <p>Become a tutor and get volunteering hours!</p>
+                                <p>Email <a href='mailto://tutoring@avnce.org'>tutoring@avnce.org</a> to apply.</p>
+                            </div>
                         </div>
                     </>
                 ) : (

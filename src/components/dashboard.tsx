@@ -116,7 +116,7 @@ const Dash = () => {
                         <h3 id='err'>{err}</h3>
                         <br />
                         <div id="c">
-                            <h1>Join a course</h1>
+                            <h1>Join a class</h1>
                             <form action={joinClass}>
                                 <input placeholder='Join Code' id='join_code'/>
                                 <button type='submit'>Join</button>
