@@ -14,8 +14,8 @@ const Dash = () => {
     const [profileInformation, setProfileInformation] = useState(null);
     const [spacesInformation, setSpacesInformation] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [err, setError] = useState('')
     let router = useRouter()
-
     useEffect(() => {
         const fetchData = async () => {
             if (hasCookie("authorization")) {
@@ -86,12 +86,10 @@ const Dash = () => {
             })
         }).then((r) => {
             r.json().then((res) => {
-                if (res.status == 'OK') {
-                    router.push("/dashboard")
-                } else {
-                    // @ts-ignore
-                    document.getElementById('err').style.display = 'inline';
+                if (res.status != 'ok') {
+                    setError(res.status)
                 }
+                router.push("/dashboard")
             })
         })
     }
@@ -105,12 +103,7 @@ const Dash = () => {
             })
         }).then((r) => {
             r.json().then((res) => {
-                if (res.status == 'OK') {
-                    router.push("/dashboard")
-                } else {
-                    // @ts-ignore
-                    document.getElementById('err').style.display = 'inline';
-                }
+                router.push("/dashboard")
             })
         })
     }
@@ -120,19 +113,22 @@ const Dash = () => {
             <dialog id="join_course">
                 <div id='j_course_body'>
                     <div id="middle">
-                        <h3 id='err'></h3>
-                        <h1>Join a course</h1>
-                        <form action={joinClass}>
-                            <input placeholder='Join Code' id='join_code'/>
-                            <button type='submit'>Join</button>
-                        </form>
+                        <h3 id='err'>{err}</h3>
+                        <br />
+                        <div id="c">
+                            <h1>Join a course</h1>
+                            <form action={joinClass}>
+                                <input placeholder='Join Code' id='join_code'/>
+                                <button type='submit'>Join</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </dialog>
             <dialog id="create_course">
                 <div id='x_course_body'>
                     <div id="middle">
-                        <h3 id='err'></h3>
+                        <h3 id='err2'>{err}</h3>
                         <h1>Create a class</h1>
                         <form action={createClass}>
                             <input placeholder='Class Name' id='class_name'/>

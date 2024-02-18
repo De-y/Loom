@@ -9,6 +9,10 @@ body {
         text-align: center;
         padding: 25px;
     }
+    h2 {
+        font-size: 20px;
+        font-family: 'Poppins-SemiBold';
+    }
     a {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 20px;

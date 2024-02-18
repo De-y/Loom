@@ -115,11 +115,17 @@ export default async function space({ params }: { params: { id: string } }) {
     })
     openSessions = (await sessionsFilterer(openSessions))
     sessionsList = (await sessionsFilterer(sessionsList))
+    let j_code = await db.spaceTeaching.findFirst({
+        'where': {
+            'id': currentSpace.uid
+        }
+    })
     return (
         <>
         <DashboardNavbar />
         <div className='tutoringlearn'>
             <h1>{currentSpace.name}</h1>
+            <h2>Join Code: {j_code.joinCode}</h2>
         </div>
         {isTutor ? (<>
                     <UseSession />
