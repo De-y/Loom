@@ -11,6 +11,7 @@ export async function POST(request: Request) {
         const coreInformation = data['sessionInformation']
         const handoffInformation = data['handoff']
         const ID = handoffInformation.path
+        console.log(ID)
         let availableSpaces = await fetch(`${headers().get('origin')}/api/spaces`, {
             'headers': {
                 'authorization': handoffInformation.token
@@ -20,15 +21,17 @@ export async function POST(request: Request) {
         // @ts-ignore
         availableSpaces = availableSpaces.availableSpaces
         let credentialsIdentity;
-        for (let i in availableSpaces) {
+        // @ts-ignore
+        for (let i = 0; i < availableSpaces.length; i++) {
             // @ts-ignore
-            if (availableSpaces[i].url = ID) {
+            console.log(availableSpaces[i]);
+            // @ts-ignore
+            if (availableSpaces[i].url === ID) {
                 // @ts-ignore
-                credentialsIdentity = availableSpaces[i].uid
-                break
+                credentialsIdentity = availableSpaces[i].uid;
+                break;
             }
-        }
-        // for (spaces in availableSpaces.availableSpaces) {
+        }        // for (spaces in availableSpaces.availableSpaces) {
         //     console.log(spaces)
         // }
         // @ts-ignore
