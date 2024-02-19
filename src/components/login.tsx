@@ -1,11 +1,19 @@
 'use client'
 
 import '@/css/login.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { getCookie, setCookie } from 'cookies-next'
 import jsSHA from "jssha";
+import React, { useState } from 'react';
 
 export default function LoginIt() {
     var message = ''
+    const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = useState('');
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     if (getCookie('authorization') != undefined) {
         console.log("[*] Identity Central has forbidden login.")
         // @ts-ignore
@@ -13,14 +21,14 @@ export default function LoginIt() {
     }
     const submit = async function() {
         const username = (document.getElementById('username') as HTMLInputElement)?.value
-        let password = (document.getElementById('password') as HTMLInputElement)?.value
-        let password_rei = new jsSHA("SHA3-512", "TEXT", { encoding: "UTF8" }).update(password).getHash('HEX')
-        if (password && username) {
+        const passwordValue = password;
+        if (passwordValue && username) {
+            const passwordHash = new jsSHA("SHA3-512", "TEXT", { encoding: "UTF8" }).update(passwordValue).getHash('HEX');
             const responseData = await fetch('/api/login', {
                 method: 'POST',
                 body: JSON.stringify({
                     username: username,
-                    password: password_rei
+                    password: passwordHash
                 }),
             })
             const {token, authenticated} = await responseData.json()
@@ -68,7 +76,8 @@ export default function LoginIt() {
                 </div>
                 <div className='form'>
                     <input className='input' type='text' placeholder='Username' name="Username" id="username"/>
-                    <input className='input' type='password' placeholder='Password' name="Password" id="password"/>
+                    <input className='input' type={showPassword ? 'text' : 'password'} placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} id='show_password'  onClick={togglePasswordVisibility}/>
                     <button  onClick={submit} className='submit'>Login</button>
                     <a href="/signup">Don&apos;t have an account?</a>
                 </div>
