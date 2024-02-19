@@ -150,7 +150,7 @@ export default async function space({ params }: { params: { id: string } }) {
                             <div className='card-content'>
                                 <h1>{sessionsList[sessions].sessionName}</h1>
                                 <h3>On {new Date(sessionsList[sessions].sessionTime * 1000).toDateString()}</h3>
-                                <h4>From {`${new Date(sessionsList[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((parseInt(sessionsList[sessions].sessionTime) + (sessionsList[sessions].sessionDuration * 60)) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`} UTC</h4>
+                                <h4>From {`${new Date(sessionsList[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((parseInt(sessionsList[sessions].sessionTime) + (sessionsList[sessions].sessionDuration * 60)) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
                                 <h4>Registered Students (Including yourself): {sessionsList[sessions].registeredUsers}/{sessionsList[sessions].maxUsers}</h4>
                             </div>
                         </a>                   
@@ -179,7 +179,7 @@ export default async function space({ params }: { params: { id: string } }) {
                                     <h1>{openSessions[sessions].sessionName}</h1>
                                     <h2>Hosted by {openSessions[sessions].hostFirstName}.</h2>
                                     <h3>On {new Date(openSessions[sessions].sessionTime * 1000).toDateString()}</h3>
-                                    <h4>From {`${new Date(openSessions[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((parseInt(openSessions[sessions].sessionTime) + (openSessions[sessions].sessionDuration * 60)) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`} UTC</h4>
+                                    <h4>From {`${new Date(openSessions[sessions].sessionTime * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} - ${new Date((parseInt(openSessions[sessions].sessionTime) + (openSessions[sessions].sessionDuration * 60)) * 1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`}</h4>
                                     <h4>Registered Students: {openSessions[sessions].registeredUsers}/{openSessions[sessions].maxUsers}</h4>
                                 </div>
                             </a>                    

@@ -84,7 +84,7 @@ export default async function sessionInformation({ params }: { params: { id: str
                         <h2>Hosted by {sessionData.hostFirstName}.</h2>
                         <h3>{endTime}</h3>
                         <h4>On {day}, {month} {date.getDate()}</h4>
-                        <h5>From {h_m} UTC till {adj_h_m} UTC</h5>
+                        <h5>From {h_m} till {adj_h_m}</h5>
                         <h6>{sessionData.ended ? "Ended" : "Not Ended"}</h6>
                         {
                             (host == true || accountLookupService.permission >= 3) ? (<>
