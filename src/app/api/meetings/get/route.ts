@@ -37,7 +37,7 @@ export async function POST(request: Request) {
             })
             if (s_id != null || m_id.hostUsername == accountLookupService.username) {
                 let l = new Date().getTime()
-                if (((parseInt(m_id.sessionTime) - (60 * 10)) * 1000 <= l) != true && m_id.ended == false) {
+                if (((parseInt(m_id.sessionTime) - (60 * 10)) * 1000 > l) == true && m_id.ended == false) {
                     if (accountLookupService.permission >= 3) {
                         return NextResponse.json({'status': 'WAIT'})
                     }
@@ -64,6 +64,7 @@ export async function POST(request: Request) {
                                 'roomSessionId': mR.meetingID
                             }
                         })
+                        console.log(s)
                         s = s.data.results
                         for (let i in s) {
                             // @ts-ignore
